@@ -12,7 +12,7 @@ class Balance extends RowAction
     /**
      * @return string
      */
-	protected $title = '调整金额';
+	protected $title = 'Adjust Balance';
 
     /**
      * Handle the action request.
@@ -29,9 +29,9 @@ class Balance extends RowAction
 
         return Modal::make()
             ->lg()
-            ->title('调整金额')
+            ->title('Adjust Balance')
             ->body($form)
-            ->button('调整金额');
+            ->button('Adjust Balance');
 
     }
 
@@ -40,7 +40,7 @@ class Balance extends RowAction
 	 */
 	public function confirm()
 	{
-       // return ['你确定要删除此行内容吗？', '弹窗内容'];
+       // return ['Are you sure you want to delete this row?', 'Modal content'];
 	}
 
     /**

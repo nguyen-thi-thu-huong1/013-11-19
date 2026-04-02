@@ -17,7 +17,7 @@ class ApiController extends AdminController
      * @return Grid
      */
  
-	protected $category = ['1' => '<font color="blue">可用</font>','0' => '<font color="red">禁用</font>'];  
+	protected $category = ['1' => '<font color="blue">Active</font>','0' => '<font color="red">Disabled</font>'];  
     protected function grid()
     {
         return Grid::make(new Api(), function (Grid $grid) {
@@ -26,7 +26,7 @@ class ApiController extends AdminController
             $grid->column('api_name');
             $grid->column('api_money')->display(function (){
 				$id = 'money_'.$this->api_code;
-                return '<span id='.$id.'>'.$this->api_money."</span>&nbsp;&nbsp;&nbsp;<a  onclick='test(this)' id='$this->api_code'>刷新</a>";
+                return '<span id='.$id.'>'.$this->api_money."</span>&nbsp;&nbsp;&nbsp;<a  onclick='test(this)' id='$this->api_code'>Refresh</a>";
             });			
             $grid->column('state')->using($this->category);
 			$grid->column('order_by');
@@ -70,8 +70,8 @@ class ApiController extends AdminController
             $form->display('id');
             $form->text('api_code');
             $form->text('api_name');
-			$form->text('order_by')->help("数字越小越靠前");
-            $form->radio('state')->options([1 => '可用',0 => '禁用']);        
+			$form->text('order_by')->help("Lower numbers appear first");
+            $form->radio('state')->options([1 => 'Active',0 => 'Disabled']);        
             $form->display('created_at');
             $form->display('updated_at');
         });

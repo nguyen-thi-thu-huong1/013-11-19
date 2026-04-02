@@ -14,19 +14,19 @@ class SystemConfigController extends AdminController
     public function index(Content $content)
     {
         return $content
-            ->title('支付设置')
+            ->title('Payment Settings')
             ->body(new Card(new PaySetting()));
     }
 
     public function siteSetting(Content $content)
     {
         return $content
-            ->title('网站设置')
+            ->title('Website Settings')
             ->body(new Card(new SiteSetting()));
     }
 
     public function clear(Content $content)
     {
-        return $content->title('数据清理')->body(new Card(new ClearForm()));
+        return $content->title('Data Cleanup')->body(new Card(new ClearForm()));
     }
 }

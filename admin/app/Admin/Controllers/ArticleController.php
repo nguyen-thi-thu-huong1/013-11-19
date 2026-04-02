@@ -23,7 +23,7 @@ class ArticleController extends AdminController
             $grid->column('name');
             $grid->column('cateid')->display(function($cateid){
                 $vipinfo = Articlescate::find($cateid);
-                return ($vipinfo) ? $vipinfo->name : '注册会员';
+                return ($vipinfo) ? $vipinfo->name : 'Registered Member';
             });
             $grid->column('created_at');
             $grid->column('updated_at');
@@ -70,12 +70,12 @@ class ArticleController extends AdminController
             foreach ($settlements as $k => $v) {
                 $options[$v->id] = $v->name;
             }
-            $form->select('cateid','文章分类')->options($options);
+            $form->select('cateid','Article Category')->options($options);
             $form->editor('content')->required();
             $form->editor('encontent')->required();
             $form->text('stor');
             $form->saving(function (Form $form) {
-                // 判断是否是新增操作
+                // Check if this is a create operation
                 if ($form->isCreating()) {
                     $form->created_at = date('Y-m-d H:i:s');
                     $form->updated_at = date('Y-m-d H:i:s');

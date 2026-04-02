@@ -10,7 +10,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class CodePayController extends AdminController
 {
-    protected $state = [1 => '可用',0 => '禁用'];
+    protected $state = [1 => 'Active',0 => 'Disabled'];
     /**
      * Make a grid builder.
      *
@@ -20,11 +20,11 @@ class CodePayController extends AdminController
     {
         return Grid::make(new CodePay(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('content','标题');
-            $grid->column('mch_id','帐号');
-            $grid->column('min_price','最低充值金额');
-            $grid->column('max_price','最大充值金额');
-            $grid->column('status','状态')->using($this->state);
+            $grid->column('content','Title');
+            $grid->column('mch_id','Account');
+            $grid->column('min_price','Minimum Deposit Amount');
+            $grid->column('max_price','Maximum Deposit Amount');
+            $grid->column('status','Status')->using($this->state);
             $grid->column('created_at');
             // $grid->column('updated_at')->sortable();
 
@@ -65,12 +65,12 @@ class CodePayController extends AdminController
     {
         return Form::make(new CodePay(), function (Form $form) {
             $form->display('id');
-             $form->text('content','标题')->required();
-            $form->text('mch_id','帐号')->required();
-            $form->decimal('min_price','最低充值金额')->required();
-            $form->decimal('max_price','最大充值金额')->required();
-            $form->image('payimg','收款二维码')->uniqueName()->required();
-            $form->radio('status','状态')->options([1 => '可用',0 => '禁用'])->default(1);
+             $form->text('content','Title')->required();
+            $form->text('mch_id','Account')->required();
+            $form->decimal('min_price','Minimum Deposit Amount')->required();
+            $form->decimal('max_price','Maximum Deposit Amount')->required();
+            $form->image('payimg','Payment QR Code')->uniqueName()->required();
+            $form->radio('status','Status')->options([1 => 'Active',0 => 'Disabled'])->default(1);
             $form->display('created_at');
             $form->display('updated_at');
         });

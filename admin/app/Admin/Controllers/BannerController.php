@@ -10,9 +10,9 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class BannerController extends AdminController
 {
-    protected $state = [1 => '显示',0 => '禁用'];
+    protected $state = [1 => 'Visible',0 => 'Disabled'];
 
-    protected $type = [1 => 'PC',2 => '手机'];
+    protected $type = [1 => 'PC',2 => 'Mobile'];
 
     /**
      * Make a grid builder.

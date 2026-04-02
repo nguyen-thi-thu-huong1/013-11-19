@@ -12,7 +12,7 @@ use App\Services\TgService;
 class TransferLogController extends AdminController
 {
 
-    protected $transfer_type = [1 => '转出',0 => '转入',3 => '管理员增加',4 => '管理员扣除'];
+    protected $transfer_type = [1 => 'Transfer Out',0 => 'Transfer In',3 => 'Admin Addition',4 => 'Admin Deduction'];
     /**
      * Make a grid builder.
      *
@@ -34,15 +34,15 @@ class TransferLogController extends AdminController
                $game[$val['platform_code']]  = $val['platformname'];
             }
             $grid->column('api_type')->using($game);
-            $grid->column('user_data.username','用户名');
+            $grid->column('user_data.username','Username');
             $grid->column('transfer_type')->using($this->transfer_type);
             $grid->column('money');
             //$grid->column('cash_fee');
             //$grid->column('real_money');
             $grid->column('before_money');
             $grid->column('after_money');
-            $grid->column('state')->using([1 => '成功',2 => '失败']);
-            $grid->column('remark','备注');
+            $grid->column('state')->using([1 => 'Successful',2 => 'Failed']);
+            $grid->column('remark','Remarks');
             $grid->column('created_at');
 
             $grid->disableActions();
@@ -56,7 +56,7 @@ class TransferLogController extends AdminController
                $game[$val['platform_code']]  = $val['platformname'];
             }                
                 $filter->equal('id');
-                $filter->equal('user_data.username','用户名');
+                $filter->equal('user_data.username','Username');
                 $filter->between('created_at')->datetime();
                 $filter->equal('api_type')->select($game);
                 $filter->equal('transfer_type')->select($this->transfer_type);
@@ -64,16 +64,16 @@ class TransferLogController extends AdminController
             });
 
             $grid->footer(function ($collection) use ($grid) {
-                // 本页统计
+                // Current page totals
                 $transfer_in = $collection->where('transfer_type',0)->sum('money');
                 $str = "<div class='pull-right'>";
-                $str .= "本页总计转出：<span style='color:red;'>".$transfer_in."</span>";
+                $str .= "Page Total Transfer Out:<span style='color:red;'>".$transfer_in."</span>";
                 $transfer_out = $collection->where('transfer_type',1)->sum('money');
-                $str .= "&nbsp;&nbsp;&nbsp;本页总计转入：<span style='color:red;'>".$transfer_out."</span>";
+                $str .= "&nbsp;&nbsp;&nbsp;Page Total Transfer In:<span style='color:red;'>".$transfer_out."</span>";
                 $str .= "</div><br>";
-                // 全部统计
+                // All records totals
                 $query = ModelsTransferLog::query();
-                // 拿到表格筛选 where 条件数组进行遍历
+                // Iterate over grid filter where conditions
                 $grid->model()->getQueries()->unique()->each(function ($value) use (&$query) {
                     if (in_array($value['method'], ['paginate', 'get', 'orderBy', 'orderByDesc'], true)) {
                         return;
@@ -92,8 +92,8 @@ class TransferLogController extends AdminController
                 $transfer_out_all = $query->where('transfer_type',1)->sum('money');
 
                 $str .= "<div class='pull-right'>";
-                $str .= "总计转出：<span style='color:red;'>".$transfer_out_all."</span>";
-                $str .= "&nbsp;&nbsp;&nbsp;总计转入：<span style='color:red;'>".$transfer_in_all."</span>";
+                $str .= "Total Transfer Out:<span style='color:red;'>".$transfer_out_all."</span>";
+                $str .= "&nbsp;&nbsp;&nbsp;Total Transfer In:<span style='color:red;'>".$transfer_in_all."</span>";
                 $str .= "</div>";
                 return $str;
             });

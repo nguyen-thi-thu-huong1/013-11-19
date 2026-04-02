@@ -12,7 +12,7 @@ use App\Services\Lib;
 
 class Userbalance extends Form implements LazyRenderable
 {
-    use LazyWidget; // 使用异步加载功能
+    use LazyWidget; // Enable lazy loading
     /**
      * Handle the form request.
      *
@@ -26,20 +26,20 @@ class Userbalance extends Form implements LazyRenderable
 
         $balance= $input['balance'] ?? 0;
         if (! $id) {
-            return $this->response()->error('参数错误');
+            return $this->response()->error('Invalid parameter');
         }
 
         if (!is_numeric($balance)) {
-            return $this->response()->error('金额输入错误');
+            return $this->response()->error('Invalid amount');
         }
 
         $user = Users::query()->find($id);
         if (! $user) {
-            return $this->response()->error('用户不存在');
+            return $this->response()->error('User not found');
         }
 
         if($user->balance+$balance<0){
-            return $this->response()->error('账户余额不足，无法完成扣除操作');
+            return $this->response()->error('Insufficient balance to complete the deduction');
         }
 
         $arr = [
@@ -66,10 +66,10 @@ class Userbalance extends Form implements LazyRenderable
             if ($res['code'] == 200) {
                 $ip_address = $res['data']['country'] . $res['data']['province'] . $res['data']['city'];
             }
- UserOperateLog::insertLog($user->id, 7, $_SERVER['HTTP_USER_AGENT'], $ip, $ip_address, '管理员调整【' . $user->username . '】账户余额，调整金额数'.$balance.'，调整前金额'.$user->balance.'，调整后金额'.$user->balance);
+ UserOperateLog::insertLog($user->id, 7, $_SERVER['HTTP_USER_AGENT'], $ip, $ip_address, 'Admin adjusted balance for [' . $user->username . ']: adjustment=' . $balance . ', before=' . $user->balance . ', after=' . $user->balance);
  
 
-        return $this->response()->success('账户余额调整成功')->refresh();
+        return $this->response()->success('Account balance adjusted successfully')->refresh();
 
     }
 
@@ -78,8 +78,8 @@ class Userbalance extends Form implements LazyRenderable
      */
     public function form()
     {
-        //$this->confirm('您确定要调整余额吗', 'content');
-        $this->text('balance','调整金额')->rules('required')->default(0.00)->help('输入调整金额，整数为增加，负数为扣除');
-        $this->text('balance_source','资金来源');
+        //$this->confirm('Are you sure you want to adjust the balance?', 'content');
+        $this->text('balance','Adjust Amount')->rules('required')->default(0.00)->help('Enter adjustment amount; positive to add, negative to deduct');
+        $this->text('balance_source','Funding Source');
     }
 }

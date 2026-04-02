@@ -22,36 +22,36 @@ class FinanceReportController extends AdminController
         return Grid::make(new User(), function (Grid $grid) {
             $grid->model()->orderBy('id', 'desc');
             $grid->column('id')->sortable();
-            $grid->column('isagent','代理')->using([1 => '是',0 => '否']);
+            $grid->column('isagent','Agent')->using([1 => 'Yes',0 => 'No']);
             $grid->column('username');
-            $grid->column('recharge_times','充值次数')->display(function (){
+            $grid->column('recharge_times','Deposit Count')->display(function (){
                 return $this->agentrechargeTimes();
             });
-            $grid->column('withdraw_times','提款次数')->display(function (){
+            $grid->column('withdraw_times','Withdrawal Count')->display(function (){
                 return $this->agentwithdrawTimes();
             });
-            $grid->column('recharge_sum','总存款')->display(function (){
+            $grid->column('recharge_sum','Total Deposits')->display(function (){
                 return $this->agentrechargeSum();
             });
-            $grid->column('withdraw_sum','总提现')->display(function (){
+            $grid->column('withdraw_sum','Total Withdrawals')->display(function (){
                 return $this->agentwithdrawSum();
             });
-            $grid->column('fanshui_sum','总反水')->display(function (){
+            $grid->column('fanshui_sum','Total Cashback')->display(function (){
                 return AppUser::totalfanhui($this->id);
             });
-            $grid->column('profit','盈亏总额')->display(function (){
+            $grid->column('profit','Total Profit/Loss')->display(function (){
                 return $this->agentrechargeSum() - $this->agentwithdrawSum();
             });
             $grid->disableActions();
             $grid->disableCreateButton();
-            //名字搜索
+            // Name search
             $grid->quickSearch('user_data.username');
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
                 $filter->equal('user_data.username');
-                $filter->between('created_at', '日期')->date();
-                $filter->between('balance', '金额');
+                $filter->between('created_at', 'Date')->date();
+                $filter->between('balance', 'Amount');
             });
         });
     }
@@ -74,17 +74,17 @@ class FinanceReportController extends AdminController
             $show->field('vip');
             $show->field('level');
             // $show->field('paypwd');
-            $show->field('isonline')->using([1 => '在线',0 => '离线']);
-            $show->field('isagent')->using([1 => '是',0 => '否']);
-            $show->field('allowagent')->using([1 => '是',0 => '否']);
+            $show->field('isonline')->using([1 => 'Online',0 => 'Offline']);
+            $show->field('isagent')->using([1 => 'Yes',0 => 'No']);
+            $show->field('allowagent')->using([1 => 'Yes',0 => 'No']);
             $show->field('balance');
             $show->field('mbalance');
             $show->field('phone');
             $show->field('mail');
             $show->field('paysum');
-            $show->field('status')->using([1 => '正常',0 => '禁用']);
-            $show->field('isdel')->using([1 => '是',0 => '否']);
-            $show->field('isblack')->using([1 => '是',0 => '否']);
+            $show->field('status')->using([1 => 'Active',0 => 'Disabled']);
+            $show->field('isdel')->using([1 => 'Yes',0 => 'No']);
+            $show->field('isblack')->using([1 => 'Yes',0 => 'No']);
             $show->field('lastip');
             $show->logintime()->as(function ($logintime) {
                 return date('Y-m-d H:i:s',$logintime);
@@ -107,33 +107,33 @@ class FinanceReportController extends AdminController
             $form->display('id');
             // $form->text('fid');
             if ($form->isCreating()) {
-                $form->text('username')->rules('required|unique:users',['required' => '请填写用户名','unique' => '用户名重复']);
+                $form->text('username')->rules('required|unique:users',['required' => 'Username is required','unique' => 'Username already exists']);
             } else {
                 $form->display('username');
             }
-            $form->text('password','密码')->creationRules('required,min:6,max:16',['required' => '请填写密码','min' => '密码最少6位数','max' => '密码最多16位']);
-            $form->text('realname')->rules('required',['required' => '请填写真实姓名']);
+            $form->text('password','Password')->creationRules('required,min:6,max:16',['required' => 'Password is required','min' => 'Password must be at least 6 characters','max' => 'Password must be at most 16 characters']);
+            $form->text('realname')->rules('required',['required' => 'Full name is required']);
             $form->text('vip');
             $form->text('level');
             $form->text('paypwd');
             // $form->text('isonline');
-            $form->radio('isagent')->options([1 => '是',0 => '否'])->default(0);
-            $form->radio('allowagent')->options([1 => '是',0 => '否'])->default(0);
+            $form->radio('isagent')->options([1 => 'Yes',0 => 'No'])->default(0);
+            $form->radio('allowagent')->options([1 => 'Yes',0 => 'No'])->default(0);
             $form->text('balance');
             $form->text('mbalance');
             $form->text('phone');
             $form->text('mail');
             // $form->text('paysum');
-            $form->radio('status')->options([1 => '正常',0 => '禁用'])->default(1);
-            $form->text('isdel')->options([1 => '是',0 => '否'])->default(0);
-            $form->text('isblack')->options([1 => '是',0 => '否'])->default(0);
+            $form->radio('status')->options([1 => 'Active',0 => 'Disabled'])->default(1);
+            $form->text('isdel')->options([1 => 'Yes',0 => 'No'])->default(0);
+            $form->text('isblack')->options([1 => 'Yes',0 => 'No'])->default(0);
             // $form->text('lastip');
             // $form->text('logintime');
             $form->text('sourceurl');
             // $form->text('loginsum');
 
             $form->saving(function (Form $form) {
-                // 判断是否是新增操作
+                // Check if this is a create operation
                 if ($form->isCreating()) {
                     $form->password = Hash::make($form->password);
                     $form->paypwd = $form->paypwd ? Hash::make($form->paypwd) : '';

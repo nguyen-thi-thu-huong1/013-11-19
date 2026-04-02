@@ -11,7 +11,7 @@ use App\Services\TgService;
 use App\Admin\Tools\UrlEdit;
 class GameListController extends AdminController
 {
-    protected $category = ['realbet' => '真人','sport' => '体育','concise' => '电子','gaming' => '电竞','joker' => '棋牌','lottery' => '彩票']; 
+    protected $category = ['realbet' => 'Live Dealer','sport' => 'Sports','concise' => 'Slots','gaming' => 'Esports','joker' => 'Card Games','lottery' => 'Lottery']; 
     /**
      * Make a grid builder.
      *
@@ -32,13 +32,13 @@ class GameListController extends AdminController
             $grid->column('category_id')->using($this->category);
             // $grid->column('order_by');
             // $grid->column('state');
-            // $grid->column('is_hot')->using([1 => '是',0 => '否']);
-            // $grid->column('is_new')->using([1 => '是',0 => '否']);
-            // $grid->column('is_recommend')->using([1 => '是',0 => '否']);
-            // $grid->column('is_pc')->using([1 => '是',0 => '否']);
-            // $grid->column('is_mobile')->using([1 => '是',0 => '否']);
-            $grid->column('site_state')->using([1 => '正常',0 => '关闭']);
-            //$grid->column('app_state')->using([1 => '正常',0 => '关闭']);
+            // $grid->column('is_hot')->using([1 => 'Yes',0 => 'No']);
+            // $grid->column('is_new')->using([1 => 'Yes',0 => 'No']);
+            // $grid->column('is_recommend')->using([1 => 'Yes',0 => 'No']);
+            // $grid->column('is_pc')->using([1 => 'Yes',0 => 'No']);
+            // $grid->column('is_mobile')->using([1 => 'Yes',0 => 'No']);
+            $grid->column('site_state')->using([1 => 'Active',0 => 'Disabled']);
+            //$grid->column('app_state')->using([1 => 'Active',0 => 'Disabled']);
             $grid->column('created_at');
             // $grid->column('updated_at')->sortable();
         
@@ -105,18 +105,18 @@ class GameListController extends AdminController
             // $form->text('keywords');
             $form->text('game_code')->required();
 			$form->select('category_id')->options($this->category)->required();
-			$form->image('api_logo_img','接口图标')->saveFullUrl();
-            $form->image('check_yes_img','PC选中状态')->saveFullUrl();
-            $form->image('check_no_img','PC未选中状态')->saveFullUrl();
-            $form->image('mobile_img','手机端图片')->saveFullUrl();			
-            $form->number('order_by')->default(0)->help("数字越小越靠前");
-            // $form->radio('is_hot')->options([1 => '是',0 => '否'])->default(0);
-            // $form->radio('is_new')->options([1 => '是',0 => '否'])->default(0);
-            // $form->radio('is_recommend')->options([1 => '是',0 => '否'])->default(0);
-            // $form->radio('is_pc')->options([1 => '是',0 => '否'])->default(1);
-            // $form->radio('is_mobile')->options([1 => '是',0 => '否'])->default(1);
-            $form->radio('site_state')->options([1 => '正常',0 => '关闭'])->default(1);
-            //$form->radio('app_state')->options([1 => '正常',0 => '关闭'])->default(1);
+			$form->image('api_logo_img','API Icon')->saveFullUrl();
+            $form->image('check_yes_img','PC Selected State')->saveFullUrl();
+            $form->image('check_no_img','PC Unselected State')->saveFullUrl();
+            $form->image('mobile_img','Mobile Image')->saveFullUrl();			
+            $form->number('order_by')->default(0)->help("Lower numbers appear first");
+            // $form->radio('is_hot')->options([1 => 'Yes',0 => 'No'])->default(0);
+            // $form->radio('is_new')->options([1 => 'Yes',0 => 'No'])->default(0);
+            // $form->radio('is_recommend')->options([1 => 'Yes',0 => 'No'])->default(0);
+            // $form->radio('is_pc')->options([1 => 'Yes',0 => 'No'])->default(1);
+            // $form->radio('is_mobile')->options([1 => 'Yes',0 => 'No'])->default(1);
+            $form->radio('site_state')->options([1 => 'Active',0 => 'Disabled'])->default(1);
+            //$form->radio('app_state')->options([1 => 'Active',0 => 'Disabled'])->default(1);
         
             $form->display('created_at');
             $form->display('updated_at');

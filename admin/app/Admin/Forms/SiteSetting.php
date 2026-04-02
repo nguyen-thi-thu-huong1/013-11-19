@@ -28,7 +28,7 @@ class SiteSetting extends Form
         }
         return $this
 				->response()
-				->success('操作成功')
+				->success('Operation successful')
 				->refresh();
     }
 
@@ -37,112 +37,112 @@ class SiteSetting extends Form
      */
     public function form()
     {
-        $this->tab('网站配置', function () {
-            $this->text('site_name','网站名称');
-            $this->image('site_logo','网站Logo')->uniqueName();
-            $this->text('site_title','网站标题');
-            $this->text('site_keyword','网站关键词');
-            $this->text('kf_url','客服链接');
-            $this->text('safe_domain','安全域名')->help("多个地址用,隔开，不填则不限制；如：http://PC域名,http://手机域名,http://tggood.com");
-            $this->radio('redpacket','红包开关')->options([1 => '正常',0 => '关闭'])->default(1);
-            $this->radio('fanshui','返水开关')->options([1 => '正常',0 => '关闭'])->default(1);
-            $this->radio('site_state','网站状态')->options([1 => '正常',0 => '维护'])->default(1);
-            $this->text('repair_tips','网站维护提示语');
-            $this->radio('isclose','首页弹窗')->options([1 => '正常',0 => '关闭'])->default(1);
-            $this->editor('webcontent','弹窗内容');
+        $this->tab('Website Configuration', function () {
+            $this->text('site_name','Website Name');
+            $this->image('site_logo','Website Logo')->uniqueName();
+            $this->text('site_title','Website Title');
+            $this->text('site_keyword','Website Keywords');
+            $this->text('kf_url','Customer Service URL');
+            $this->text('safe_domain','Allowed Domains')->help("Separate multiple addresses with commas; leave blank for no restriction. E.g.: http://pc-domain.com,http://mobile-domain.com,http://tggood.com");
+            $this->radio('redpacket','Red Packet Switch')->options([1 => 'Active',0 => 'Disabled'])->default(1);
+            $this->radio('fanshui','Cashback Switch')->options([1 => 'Active',0 => 'Disabled'])->default(1);
+            $this->radio('site_state','Website Status')->options([1 => 'Active',0 => 'Maintenance'])->default(1);
+            $this->text('repair_tips','Maintenance Message');
+            $this->radio('isclose','Homepage Popup')->options([1 => 'Active',0 => 'Disabled'])->default(1);
+            $this->editor('webcontent','Popup Content');
         });
 
-        $this->tab('APP配置', function () {
-            //$this->text('android_version','安卓版本号');
-            //$this->text('android_download_url','安卓下载地址');
-            //$this->image('android_download_qrcode','安卓下载二维码')->uniqueName();
-            // $this->text('ios_version','IOS版本号');
-            $this->text('ios_download_url','分发下载地址');
-            $this->image('ios_download_qrcode','分发下载二维码')->uniqueName();
+        $this->tab('APP Configuration', function () {
+            //$this->text('android_version','Android Version');
+            //$this->text('android_download_url','Android Download URL');
+            //$this->image('android_download_qrcode','Android Download QR Code')->uniqueName();
+            // $this->text('ios_version','iOS Version');
+            $this->text('ios_download_url','Distribution Download URL');
+            $this->image('ios_download_qrcode','Distribution Download QR Code')->uniqueName();
         });
         
-        $this->tab('接口设置', function() {
-          //  $this->text('game_api','API接口地址');
+        $this->tab('API Settings', function() {
+          //  $this->text('game_api','API Endpoint URL');
             $this->text('merchant_account','ApiToken');
-            $this->text('api_secret','MD5密码');
-           // 按钮链接（自行改成你要的 URL）
+            $this->text('api_secret','MD5 Secret');
+           // Button links (replace with your desired URLs)
     $url1 = 'https://merchant.fsgameapi.com/Register/Index?p=BD9A7DA86CE706A662FC6A84ACDCF9238709BCD8F6DFFB20F69FE08A73356D4B2E0F96D4048E5381935EB883032E7FA337ED7F17DADDAB710CA502F9B29610C9E607A1D45AD9BAE3522A3C87A1B30CA7';
     $url2 = 'https://bet.fsgameapi.com';
     $url3 = 'https://t.me/fsapibot';
     $url4 = 'https://t.me/fstongzhi';
 
-    // 按钮 HTML
+    // Button HTML
     $buttons = <<<HTML
 <div style="margin-top:20px;">
 
     <a href="{$url1}" target="_blank" class="btn btn-primary" style="margin-right:15px;">
-        注册接口商户
+        Register API Merchant
     </a>
 
     <a href="{$url2}" target="_blank" class="btn btn-success" style="margin-right:15px;">
-        商户后台
+        Merchant Dashboard
     </a>
 
     <a href="{$url3}" target="_blank" class="btn btn-warning" style="margin-right:15px;">
-        接口机器人
+        API Bot
     </a>
 
     <a href="{$url4}" target="_blank" class="btn btn-danger">
-        接口维护通知
+        API Maintenance Notifications
     </a>
 
 </div>
 HTML;
 
-    // 输出按钮
+    // Render buttons
     $this->html($buttons);
 });
 
-        $this->tab('支付设置', function() {
-            $this->text('onlinepay_title','网上支付标题');
-            $this->text('onlinepay_des','网上支付说明');
-            $this->text('companypay_title','公司入款标题');
-            $this->text('companypay_des','公司入款说明');
+        $this->tab('Payment Settings', function() {
+            $this->text('onlinepay_title','Online Payment Title');
+            $this->text('onlinepay_des','Online Payment Description');
+            $this->text('companypay_title','Company Deposit Title');
+            $this->text('companypay_des','Company Deposit Description');
 
         });
         
-        $this->tab('存款设置',function() {
-            $this->number('min_recharge_money','最低存款限额');
-            $this->text('recharge_fee','充值赠送比例(%)');
-            $this->number('max_recharge_money','最高存款限额');
-            $this->decimal('usdt_rate','USDT汇率');
-            $this->decimal('min_price','银行卡最低充值金额')->required();
-            $this->decimal('max_price','银行卡最大充值金额')->required();
+        $this->tab('Deposit Settings',function() {
+            $this->number('min_recharge_money','Minimum Deposit Amount');
+            $this->text('recharge_fee','Deposit Bonus Rate (%)');
+            $this->number('max_recharge_money','Maximum Deposit Amount');
+            $this->decimal('usdt_rate','USDT Exchange Rate');
+            $this->decimal('min_price','Bank Card Minimum Deposit')->required();
+            $this->decimal('max_price','Bank Card Maximum Deposit')->required();
         });
 
-        $this->tab('提款设置',function() {
-            $this->time('withdraw_begin_time','提款开始时间');
-            $this->time('withdraw_end_time','提款结束时间');
-            $this->number('daily_withdraw_times','每日可提款次数');
-            $this->number('min_withdraw_money','最低提款限额');
-            $this->number('max_withdraw_money','最高提款限额');
-            $this->text('withdraw_fee','打码量倍数');
-            $this->number('min_fanshui_money','最低返水限额');
-            $this->decimal('withdraw_cash_fee','USDT-TRC20手续费');
-            $this->decimal('withdraw_fee_usdt_erc','USDT-ERC20手续费');
-            $this->decimal('withdraw_usdt_rate','提现USDT汇率');
+        $this->tab('Withdrawal Settings',function() {
+            $this->time('withdraw_begin_time','Withdrawal Start Time');
+            $this->time('withdraw_end_time','Withdrawal End Time');
+            $this->number('daily_withdraw_times','Daily Withdrawal Limit');
+            $this->number('min_withdraw_money','Minimum Withdrawal Amount');
+            $this->number('max_withdraw_money','Maximum Withdrawal Amount');
+            $this->text('withdraw_fee','Wagering Multiplier');
+            $this->number('min_fanshui_money','Minimum Cashback Amount');
+            $this->decimal('withdraw_cash_fee','USDT-TRC20 Fee');
+            $this->decimal('withdraw_fee_usdt_erc','USDT-ERC20 Fee');
+            $this->decimal('withdraw_usdt_rate','Withdrawal USDT Rate');
         });
 
         
-        $this->tab('代理设置',function() {
-            $this->select('settlement','代理结算周期')->options([1 => 'T+1',2 => 'T+2',3 => 'T+3',4 => 'T+4',5 => 'T+5',6 => 'T+6',7 => 'T+7',10 => 'T+10',15 => 'T+15',20 => 'T+20',30 => 'T+30'])->default(4);
-            $this->radio('settlementtypes','代理结算方式')->options([1 => '按输赢结算',0 => '按打码量结算'])->default(1);
-            $this->number('settlementlevel','代理返佣级数');
+        $this->tab('Agent Settings',function() {
+            $this->select('settlement','Agent Settlement Cycle')->options([1 => 'T+1',2 => 'T+2',3 => 'T+3',4 => 'T+4',5 => 'T+5',6 => 'T+6',7 => 'T+7',10 => 'T+10',15 => 'T+15',20 => 'T+20',30 => 'T+30'])->default(4);
+            $this->radio('settlementtypes','Agent Settlement Method')->options([1 => 'Settle by Win/Loss',0 => 'Settle by Wagering Amount'])->default(1);
+            $this->number('settlementlevel','Agent Commission Levels');
         });
         
-        $this->tab('提醒设置', function() {
-            $this->select('notice_set','提醒方式')->options([1 => '语音加弹窗提醒',2 => '语音提醒',3 => '弹窗提醒'])->default(1);
-            $this->file('recharge_apply_audio','充值提醒语音上传');
-            $this->file('withdraw_apply_audio','提款提醒语音上传');
-            $this->file('activity_apply_audio','活动申请语音上传');
-            $this->file('agent_apply_audio','代理申请语音上传');
-            // $this->text('syslogday','借呗申请语音上传');
-            // $this->text('syslogday','金管家申请语音上传');
+        $this->tab('Notification Settings', function() {
+            $this->select('notice_set','Notification Method')->options([1 => 'Voice + Popup',2 => 'Voice Only',3 => 'Popup Only'])->default(1);
+            $this->file('recharge_apply_audio','Deposit Notification Audio');
+            $this->file('withdraw_apply_audio','Withdrawal Notification Audio');
+            $this->file('activity_apply_audio','Activity Application Notification Audio');
+            $this->file('agent_apply_audio','Agent Application Notification Audio');
+            // $this->text('syslogday','Loan Application Notification Audio');
+            // $this->text('syslogday','Finance Manager Application Notification Audio');
 
         });
         

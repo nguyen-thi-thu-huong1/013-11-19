@@ -22,7 +22,7 @@ class HomeController extends Controller
     {
 
         return $content
-            ->header('首页')
+            ->header('Dashboard')
             ->description('')
             ->body(function (Row $row) {
                 $row->column(12, function (Column $column) {
@@ -46,7 +46,7 @@ class HomeController extends Controller
                 //     });
                 // });
 
-                // 一行多列
+                // Multiple columns per row
                 $row->column(12, function (Column $column) {
                     $column->row(function (Row $row) {
                         $merchantCredit = $this->merchantCredit();
@@ -54,14 +54,14 @@ class HomeController extends Controller
 
             $tg = New TgService;
             $gamelist =$tg->gamesalllist();        
-            $platgamename['universal'] = '通用额度';
+            $platgamename['universal'] = 'Universal Credit';
             foreach ($gamelist as $val){
                $platgamename[$val['platform_code']]  = $val['platformname'];
             }   
             $platgame = $tg->engamelist();
 
                         if($merchantCredit['data']['money_type']==2){
-                            $row->column(12, $this->card('通用额度' , (string)$merchantCredit['data']['merchant_money']['universal_money'], '#20c9b1'));
+                            $row->column(12, $this->card('Universal Credit' , (string)$merchantCredit['data']['merchant_money']['universal_money'], '#20c9b1'));
                         }
                         if($merchantCredit['data']['money_type']==1){
                         foreach ($merchantCredit['data']['merchant_money'] as $key=>$val) {
@@ -76,8 +76,8 @@ class HomeController extends Controller
 
                 $row->column(12, function (Column $column) {
                     $column->row(function (Row $row) {
-                        $row->column(6,Card::make('近7天充值',new Home\Chart\Recharge()));
-                        $row->column(6,Card::make('近7天提现',new Home\Chart\Withdraw()));
+                        $row->column(6,Card::make('Last 7 Days Deposits',new Home\Chart\Recharge()));
+                        $row->column(6,Card::make('Last 7 Days Withdrawals',new Home\Chart\Withdraw()));
                     });
                 });
             });
@@ -125,7 +125,7 @@ EOF;
     }
 
     /**
-     * 商户额度查询
+     * Merchant credit query
      *
      * @return void
      */

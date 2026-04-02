@@ -11,7 +11,7 @@ use App\Services\TgService;
 
 class GameListController extends AdminController
 {
-    protected $category = ['realbet' => '真人','sport' => '体育','concise' => '电子','gaming' => '电竞','joker' => '棋牌','lottery' => '彩票']; 
+    protected $category = ['realbet' => 'Live Dealer','sport' => 'Sports','concise' => 'Slots','gaming' => 'Esports','joker' => 'Card Games','lottery' => 'Lottery']; 
     /**
      * Make a grid builder.
      *
@@ -32,13 +32,13 @@ class GameListController extends AdminController
             $grid->column('category_id')->using($this->category);
             // $grid->column('order_by');
             // $grid->column('state');
-            // $grid->column('is_hot')->using([1 => '是',0 => '否']);
-            // $grid->column('is_new')->using([1 => '是',0 => '否']);
-            // $grid->column('is_recommend')->using([1 => '是',0 => '否']);
-            // $grid->column('is_pc')->using([1 => '是',0 => '否']);
-            // $grid->column('is_mobile')->using([1 => '是',0 => '否']);
-            $grid->column('site_state')->using([1 => '正常',0 => '关闭']);
-            $grid->column('app_state')->using([1 => '正常',0 => '关闭']);
+            // $grid->column('is_hot')->using([1 => 'Yes',0 => 'No']);
+            // $grid->column('is_new')->using([1 => 'Yes',0 => 'No']);
+            // $grid->column('is_recommend')->using([1 => 'Yes',0 => 'No']);
+            // $grid->column('is_pc')->using([1 => 'Yes',0 => 'No']);
+            // $grid->column('is_mobile')->using([1 => 'Yes',0 => 'No']);
+            $grid->column('site_state')->using([1 => 'Active',0 => 'Disabled']);
+            $grid->column('app_state')->using([1 => 'Active',0 => 'Disabled']);
             $grid->column('created_at');
             // $grid->column('updated_at')->sortable();
         
@@ -103,17 +103,17 @@ class GameListController extends AdminController
             // $form->text('name_en')->required();
             // $form->text('keywords');
             $form->display('game_code');
-            $form->text('game_icon','游戏图标');
-            $form->image('game_title_img','游戏标题图片')->saveFullUrl();
+            $form->text('game_icon','Game Icon');
+            $form->image('game_title_img','Game Title Image')->saveFullUrl();
             $form->select('category_id')->options($this->category);
             $form->number('order_by')->default(0);
-            // $form->radio('is_hot')->options([1 => '是',0 => '否'])->default(0);
-            // $form->radio('is_new')->options([1 => '是',0 => '否'])->default(0);
-            // $form->radio('is_recommend')->options([1 => '是',0 => '否'])->default(0);
-            // $form->radio('is_pc')->options([1 => '是',0 => '否'])->default(1);
-            // $form->radio('is_mobile')->options([1 => '是',0 => '否'])->default(1);
-            $form->radio('site_state')->options([1 => '正常',0 => '关闭'])->default(1);
-            $form->radio('app_state')->options([1 => '正常',0 => '关闭'])->default(1);
+            // $form->radio('is_hot')->options([1 => 'Yes',0 => 'No'])->default(0);
+            // $form->radio('is_new')->options([1 => 'Yes',0 => 'No'])->default(0);
+            // $form->radio('is_recommend')->options([1 => 'Yes',0 => 'No'])->default(0);
+            // $form->radio('is_pc')->options([1 => 'Yes',0 => 'No'])->default(1);
+            // $form->radio('is_mobile')->options([1 => 'Yes',0 => 'No'])->default(1);
+            $form->radio('site_state')->options([1 => 'Active',0 => 'Disabled'])->default(1);
+            $form->radio('app_state')->options([1 => 'Active',0 => 'Disabled'])->default(1);
         
             $form->display('created_at');
             $form->display('updated_at');

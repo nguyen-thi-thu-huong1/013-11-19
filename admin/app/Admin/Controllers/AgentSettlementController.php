@@ -11,7 +11,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 class AgentSettlementController extends AdminController
 {
 
-    protected $type = [1 => '返点',2 => '返佣'];
+    protected $type = [1 => 'Rebate',2 => 'Commission'];
     /**
      * Make a grid builder.
      *
@@ -23,7 +23,7 @@ class AgentSettlementController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('name');
             $grid->column('type')->using($this->type);
-            $grid->column('member_fs','代理返佣(%)');
+            $grid->column('member_fs','Agent Commission (%)');
             // $grid->column('state');
             $grid->column('created_at');
             // $grid->column('updated_at')->sortable();
@@ -84,16 +84,16 @@ class AgentSettlementController extends AdminController
             $form->number('fish');
             $form->number('lottery');
             $form->number('e_sport');*/
-            $form->number('member_fs',"返佣(%)");
+            $form->number('member_fs',"Commission (%)");
             // $form->text('state');
 
             $form->display('created_at');
             $form->display('updated_at');
 
             $form->tools(function (Form\Tools $tools) {
-                // 去掉跳转详情页按钮
+                // Remove view details button
                 $tools->disableView();
-                // 去掉删除按钮
+                // Remove delete button
                 $tools->disableDelete();
             });
         });

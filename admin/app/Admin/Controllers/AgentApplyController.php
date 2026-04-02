@@ -12,7 +12,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class AgentApplyController extends AdminController
 {
-    protected $state = [1 => '待审核',2 => '通过',3 => '拒绝'];
+    protected $state = [1 => 'Pending',2 => 'Approved',3 => 'Rejected'];
     /**
      * Make a grid builder.
      *
@@ -23,14 +23,14 @@ class AgentApplyController extends AdminController
         return Grid::make(new AgentApply(['user']), function (Grid $grid) {
             $grid->model()->orderBy('id', 'desc');
             $grid->column('id')->sortable();
-            $grid->column('user.username','用户名');
+            $grid->column('user.username','Username');
             $grid->column('apply_info');
             $grid->column('state')->using($this->state);
             $grid->column('created_at');
             
             $grid->disableCreateButton();
             $grid->filter(function (Grid\Filter $filter) {
-                $filter->equal('user.username','用户名');
+                $filter->equal('user.username','Username');
                 $filter->between('created_at')->datetime();
             });
             $grid->actions(function (Grid\Displayers\Actions $actions) {

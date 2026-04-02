@@ -20,17 +20,17 @@ class UserCardController extends AdminController
         return Grid::make(UserCard::with(['user_data']), function (Grid $grid) {
             $grid->model()->orderBy('id', 'desc');
             $grid->column('id')->sortable();
-            $grid->column('user_data.username','用户名')->view('admin.field.user_username');
-            $grid->column('bank','类型');
-            $grid->column('bank_no','银行卡号/USDT地址');
+            $grid->column('user_data.username','Username')->view('admin.field.user_username');
+            $grid->column('bank','Type');
+            $grid->column('bank_no','Bank Card / USDT Address');
             //$grid->column('bank_address');
-            $grid->column('bank_owner','姓名/协议');
+            $grid->column('bank_owner','Name / Protocol');
             $grid->column('created_at');
             //$grid->column('updated_at')->sortable();
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-                $filter->equal('user_data.username','用户名');
+                $filter->equal('user_data.username','Username');
             });
         });
     }

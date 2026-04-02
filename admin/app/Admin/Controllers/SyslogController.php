@@ -20,11 +20,11 @@ class SyslogController extends AdminController
         return Grid::make(Syslog::with(['user_data']), function (Grid $grid) {
             $grid->model()->orderBy('id', 'desc');
             $grid->column('id')->sortable();
-            $grid->column('user_data.username','用户名');
-            $grid->column('type')->using([1 => '用户登录',2=> '代理登录',3 => '管理员登录']);
-            $grid->column('memo','描述');
-            $grid->column('memo','IP地址');
-            $grid->column('addtime','登录时间');
+            $grid->column('user_data.username','Username');
+            $grid->column('type')->using([1 => 'User Login',2=> 'Agent Login',3 => 'Admin Login']);
+            $grid->column('memo','Description');
+            $grid->column('memo','IP Address');
+            $grid->column('addtime','Login Time');
             $grid->disableActions();
             $grid->disableCreateButton();
             $grid->filter(function (Grid\Filter $filter) {

@@ -16,7 +16,7 @@ class BackBalance extends RowAction
     /**
      * @return string
      */
-	protected $title = '一键回收';
+	protected $title = 'Retrieve Balance';
 
     /**
      * Handle the action request.
@@ -33,14 +33,14 @@ class BackBalance extends RowAction
 
         $transferlog = TransferLog::where('user_id', $user->id)->where('transfer_type', 0)->orderBy('id','desc')->first();
 		if(!$transferlog){
-			return $this->response()->success('没有可回收的金额')->refresh();
+			return $this->response()->success('No retrievable balance')->refresh();
 		}
 		$result = $tg->balance($transferlog->api_type,$user->username);
 		if($result['code'] != 200){
 			return $this->response()->error($result['message'])->refresh();
 		}
 		if($result['data'] < 1){
-			return $this->response()->success('没有可回收的金额')->refresh();
+			return $this->response()->success('No retrievable balance')->refresh();
 		}
 		$order_no = date('YmdHis').rand(100000,999999);
 		$amount = intval($result['data']);          
@@ -75,10 +75,10 @@ class BackBalance extends RowAction
 			$User_Api->api_money -= $amount;
 			$User_Api->save();						
 		}		
-        return $this->response()->success('回收成功：'.$amount.'元')->refresh();
+        return $this->response()->success('Retrieved: '.$amount)->refresh();
 		
        /* $result = $tg->recoverallbalance($user->username);
-        \Illuminate\Support\Facades\Log::info("管理后台一键回收结果".$user->username);
+        \Illuminate\Support\Facades\Log::info("Admin one-click retrieve result: ".$user->username);
 
         \Illuminate\Support\Facades\Log::info($result);        
         //$result = json_decode($result,true);
@@ -94,15 +94,15 @@ class BackBalance extends RowAction
 
             /*$blance = round($result['data']['userblance'],2);
             if($blance>0){
-                return $this->response()->success('共回收金额：'.$blance)->refresh();
+                return $this->response()->success('Total retrieved: '.$blance)->refresh();
             }else{
-                return $this->response()->success('没有可回收的金额')->refresh();
-            //  return $this->returnMsg(200,'','没有可回收的金额'.$blance);    
+                return $this->response()->success('No retrievable balance')->refresh();
+            //  return $this->returnMsg(200,'','No retrievable balance'.$blance);    
             }
              
         }else{
-            return $this->response()->success('没有可回收的金额')->refresh();
-            //  return $this->returnMsg(500,[],'没有可回收的金额');
+            return $this->response()->success('No retrievable balance')->refresh();
+            //  return $this->returnMsg(500,[],'No retrievable balance');
         }*/
     }
 
@@ -111,7 +111,7 @@ class BackBalance extends RowAction
 	 */
 	public function confirm()
 	{
-       // return ['你确定要删除此行内容吗？', '弹窗内容'];
+       // return ['Are you sure you want to delete this row?', 'Modal content'];
 	}
 
     /**

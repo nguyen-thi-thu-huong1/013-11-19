@@ -67,7 +67,7 @@ class ClearForm extends Form
         }
         return $this
             ->response()
-            ->success('操作成功')
+            ->success('Operation successful')
             ->refresh();
     }
 
@@ -76,18 +76,18 @@ class ClearForm extends Form
      */
     public function form()
     {
-        $this->confirm('确定要清除吗', '');
-        $this->tab('数据清理', function () {
-            $options = ['users_table' => '会员数据', 'game_record_table' => '投注数据', 'finance_table' => '财务数据'
-                        ,'agent_table' => '代理数据','activity_table' => '活动数据','log_table' => '日志数据'];
-            $this->checkbox('clear', '数据清理')->options($options);
-            // $this->text('users_table','会员数据保留天数');
-            // $this->text('game_record_table','投注数据保留天数');
-            // $this->text('finance_table','财务数据保留天数');
-            // $this->text('syslogday', '代理数据保留天数');
-            // $this->text('syslogday', '活动数据保留天数');
-            // $this->text('syslogday', '日志数据保留天数');
-            $this->number('save_days', '保存天数');
+        $this->confirm('Are you sure you want to clear?', '');
+        $this->tab('Data Cleanup', function () {
+            $options = ['users_table' => 'Member Data', 'game_record_table' => 'Betting Data', 'finance_table' => 'Finance Data'
+                        ,'agent_table' => 'Agent Data','activity_table' => 'Activity Data','log_table' => 'Log Data'];
+            $this->checkbox('clear', 'Data Cleanup')->options($options);
+            // $this->text('users_table','Member data retention days');
+            // $this->text('game_record_table','Betting data retention days');
+            // $this->text('finance_table','Finance data retention days');
+            // $this->text('syslogday', 'Agent data retention days');
+            // $this->text('syslogday', 'Activity data retention days');
+            // $this->text('syslogday', 'Log data retention days');
+            $this->number('save_days', 'Retention Days');
         });
     }
 

@@ -12,7 +12,7 @@ use App\Admin\Actions\Grid\Activity;
 class ActivityApplyController extends AdminController
 {
 
-    protected $state = [1 => '待审核',2 => '通过',3 => '拒绝'];
+    protected $state = [1 => 'Pending',2 => 'Approved',3 => 'Rejected'];
     /**
      * Make a grid builder.
      *
@@ -22,8 +22,8 @@ class ActivityApplyController extends AdminController
     {
         return Grid::make(ActivityApply::with(['activity_data','user_data']), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('activity_data.title','活动名称');
-            $grid->column('user_data.username','申请人');
+            $grid->column('activity_data.title','Activity Name');
+            $grid->column('user_data.username','Applicant');
             $grid->column('state')->using($this->state);
             $grid->column('check_time');
             $grid->column('created_at');

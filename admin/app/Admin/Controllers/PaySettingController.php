@@ -11,7 +11,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class PaySettingController extends AdminController
 {
-    protected $state = [1 => '可用',0 => '禁用'];
+    protected $state = [1 => 'Active',0 => 'Disabled'];
 
     /**
      * Make a grid builder.
@@ -22,7 +22,7 @@ class PaySettingController extends AdminController
     {
         return Grid::make(new PaySetting(with(['bank_data'])), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('bank_data.bank_name','银行');
+            $grid->column('bank_data.bank_name','Bank');
             $grid->column('bank_no');
             $grid->column('bank_owner');
             $grid->column('bank_address');
@@ -79,7 +79,7 @@ class PaySettingController extends AdminController
                 $list[$v->id] = $v->bank_name;
             }
             $form->display('id');
-            $form->select('bank_id','银行')->options($list)->required();
+            $form->select('bank_id','Bank')->options($list)->required();
             $form->text('bank_no')->required();
             $form->text('bank_owner')->required();
             $form->text('bank_address')->required();
