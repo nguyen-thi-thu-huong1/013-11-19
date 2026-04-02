@@ -1065,7 +1065,7 @@ class IndexController extends Controller
     }
     
     public function getVisitUrl(Request $request) {
-        $origin = $_SERVER['HTTP_ORIGIN'];
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
         if($this->isMobile()){
             
             $wapurl = env("WAP_URL");
