@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    <defs>
+        <linearGradient id="3r7ov99j4a" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#96AEFF"/>
+            <stop offset="13.12%" stop-color="#93ACFC"/>
+            <stop offset="32.312%" stop-color="#7797FE"/>
+            <stop offset="60.548%" stop-color="#6388FE"/>
+            <stop offset="100%" stop-color="#597EF7"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g fill-rule="nonzero">
+            <g>
+                <g>
+                    <path fill="url(#3r7ov99j4a)"
+                          d="M14.858 0H6.613c-1.251 0-2.27 1.02-2.27 2.27v14.962c0 1.251 1.019 2.27 2.27 2.27h8.245c1.251 0 2.27-1.019 2.27-2.27V2.27c0-1.25-1.019-2.27-2.27-2.27zM9.994.741h1.483c.185 0 .37.185.37.37 0 .186-.185.371-.37.371H9.994c-.185 0-.37-.185-.37-.37 0-.186.185-.37.37-.37zm.742 17.835c-.51 0-.973-.417-.973-.973 0-.51.417-.973.973-.973.51 0 .972.417.972.973s-.417.973-.972.973zm4.864-3.104H5.872v-.417H15.6v.417z"
+                          transform="translate(-928.000000, -2278.000000) translate(928.000000, 2278.000000) translate(5.714286, 6.857143)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

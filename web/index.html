@@ -1,0 +1,154 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content=edge><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><title></title><link rel="shortcut icon" type=image/x-icon id=iconconfig href=/static/image/1587896970671686.png><style>.mobile {
+			height: 100vh;
+			width: 100vw;
+			position: fixed;
+			top: 0;
+			left: 0
+		}
+
+		#loading {
+			position: fixed;
+			background: #efefef;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 999999
+		}
+
+		#loading svg {
+			width: 200px
+		}
+
+		::-webkit-scrollbar {
+			width: 0
+		}
+
+		::-webkit-scrollbar:horizontal {
+			height: 0
+		}
+
+		html {
+			scrollbar-width: none
+		}</style><link rel=stylesheet type=text/css href=/static/css/antd_main_81ba8019.f3df7c67.css><link rel=stylesheet type=text/css href=/static/css/antd_main_9b1fde68.c56beacb.css><link rel=stylesheet type=text/css href=/static/css/antd_main_c2e1b336.610010bf.css><link rel=stylesheet type=text/css href=/static/css/antd_main_f848cf0e.b2237fe6.css><link rel=stylesheet type=text/css href=/static/css/antd_main_81ba8019.315b4ccd.css><link rel=stylesheet type=text/css href=/static/css/main_493df0b3.71306a96.css><link rel=stylesheet type=text/css href=/static/css/main_81ba8019.85ebbbbe.css><link href=/static/css/AppPage_81ba8019.70544118.css rel=stylesheet><link href=/static/css/vendors_HomePage_kokHomePage_80e93ec1.533f31e7.css rel=stylesheet><link href=/static/css/kokHomePage_81ba8019.7a99a5ae.css rel=stylesheet><link href=/static/css/HomePage_793450d6.1af8985c.css rel=stylesheet><link href=/static/css/font.css rel=stylesheet><link rel=stylesheet type=text/css href=/static/css/othercommons_Login_Register_81ba8019.899213a8.css><link rel=stylesheet type=text/css href=/static/css/Login_793450d6.6cd821f7.css><link rel=stylesheet type=text/css href=/static/css/Lang_style.css><script src=/static/js/jquery-1.7.1.min.js></script><script src=/static/js/lang.js></script><style>#redPacket {
+			position: fixed;
+			left: 8px;
+			bottom: 40px;
+			width: 150px;
+			height: 170px;
+			z-index: 999;
+			cursor: pointer;
+			background: url(/static/image/red-packet.png);
+		}
+
+		#redPacket .grab {
+			position: absolute;
+			top: 80px;
+			left: 37px;
+			width: 70px;
+			height: 56px;
+			background: url(/static/image/grab.png)no-repeat center;
+			background-size: 100% 100%;
+			-webkit-animation: scaleDraw .4s linear infinite;
+		}
+		#redPacket img {
+			position: absolute;
+			top: 0;
+			right: -10px;
+			width: 30px!important;
+		
+
+		}
+		@keyframes scaleDraw {
+			25% {
+				transform: scale(1.1);
+			}
+
+			50% {
+				transform: scale(1.2);
+			}
+
+			75% {
+				transform: scale(1.1);
+			}
+
+			100% {
+				transform: scale(1);
+			}
+		}</style><link href=/static/css/app.6cbe056357de3c041fcdc8b5ea75d2a6.css rel=stylesheet>
+<!-- 添加电脑端自定义样式 -->
+<link href=/static/css/pc-custom.css rel=stylesheet>
+<link href=/static/css/pc-override.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script><script type=text/javascript src=/static/js/vendor.890bd005e83f73ae9989.js></script><script type=text/javascript src=/static/js/app.6e723b1c3f58b5b52cb8.js></script>
+<!-- 添加电脑端自定义脚本 -->
+<script src=/static/js/pc-custom.js></script>
+<script src=/static/js/pc-override.js></script>
+</body></html><script src=/static/js/common.js></script><script src=/static/js/swiper-bundle.min.js></script><script>var loginStatus = 1;
+	var ctx = "/";
+	// 回到顶部的显示与隐藏
+	$(window).on("load scroll", function () {
+		var top = $(document).scrollTop(),
+			wHeight = $(window).height();
+		if (top > wHeight) {
+			$(".ant-back-top").fadeIn("fast");
+		} else {
+			$(".ant-back-top").hide();
+		}
+	});
+	// 回到顶部
+	$(".ant-back-top").on("click", function () {
+		$("html,body").stop().animate({
+			scrollTop: 0
+		}, 500);
+	});
+
+	//右侧悬浮客服二维码
+	$(".xf_ewm").hover(function () {
+		$(this).find(".sidebar__qrcode__2PR2T").css("display", "block");
+	}, function () {
+		$(this).find(".sidebar__qrcode__2PR2T").css("display", "none");
+	});
+
+
+
+	//热门直播数据切换，足球、篮球、电竞
+	$(".sport-live__sortTitle__28mBY>div").click(function () {
+		var index = $(this).index();
+		$(".sport-live__sortTitle__28mBY>div").removeClass("sport-live__category_active__1WGm0").eq(index).addClass("sport-live__category_active__1WGm0");
+		//动态加载数据
+	});
+
+
+	//app下载切换
+	$(".appdownload__tabs__3tvRx .tab").click(function () {
+		var index = $(this).index();
+		$(".appdownload__tabs__3tvRx .tab").siblings().removeClass("appdownload__active__1p3Q_").eq(index).addClass("appdownload__active__1p3Q_");
+		$(".appdownload__rightSide__gWFaK .appdownload__rightSideContainer__2lGDq").siblings().removeClass("appdownload__active__1p3Q_").eq(index + 1).addClass("appdownload__active__1p3Q_");
+		$(".appdownload__leftSide__2K_EM .appdownload__appDownloadOne__2Bth6").siblings().removeClass("appdownload__active__1p3Q_").eq(index).addClass("appdownload__active__1p3Q_");
+	});
+
+	// //精彩游戏切换
+	// $(".games__content__2kgrX ul li").click(function () {
+	// 	var index = $(this).index();
+	// 	$(".games__content__2kgrX ul li").siblings().removeClass("games__active__2El6O").eq(index).addClass("games__active__2El6O");
+	// 	$(".con1 .games__bg__VnEEr").siblings().animate({ "opacity": "0", "margin-left": "-100px" }, 200).eq(index).animate({ "opacity": "1", "margin-left": "" }, 500);
+	// });
+	function closeModal() {
+		console.log(1);
+		$('.msgBox__modal__2kbbd').hide();
+	}
+	function jiazai(name,money) {
+        //setTimeout(function (){              
+		    document.getElementById("money_"+name).innerHTML=money; 
+        //}, 1000);	
+
+		
+	}	
+	
+	$('.home__noticelist__1AaLZ').on('click', function () {
+		$('.msgBox__modal__2kbbd').show();
+	});
+		
+	</script>

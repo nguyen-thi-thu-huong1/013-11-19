@@ -1,0 +1,226 @@
+/* 电脑端自定义样式 */
+:root {
+    /* 定义全局变量 */
+    --primary-color: #1890ff;
+    --text-color: #333333;
+    --background-color: #f0f2f5;
+    --border-color: #e8e8e8;
+}
+
+/* 电脑端布局样式 */
+.pc-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* 响应式断点 */
+@media screen and (min-width: 1200px) {
+    .pc-container {
+        max-width: 1140px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .pc-container {
+        max-width: 960px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .pc-container {
+        max-width: 720px;
+    }
+}
+
+/* 通用样式类 */
+.pc-hidden {
+    display: none !important;
+}
+
+.pc-visible {
+    display: block !important;
+}
+
+/* 清除浮动 */
+.pc-clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* 通知栏样式 */
+.notice__led__15X-v {
+    display: -webkit-flex !important;
+    display: flex !important;
+    -webkit-align-items: center !important;
+    align-items: center !important;
+    width: 1300px !important;
+    height: 40px !important;
+    border-radius: 30px !important;
+    background: linear-gradient(180deg, #fff, #e7f0ff) !important;
+    border: 1px solid #d1d5f5 !important;
+    padding: 0 18px !important;
+    box-shadow: 0 4px 8px rgba(136, 149, 205, .2), inset 0 0 12px rgba(255, 255, 255, .72) !important;
+    margin: 31px auto 0 !important;
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* 通知栏左侧图标容器 */
+.notice__led__15X-v .home__title__vakp6 {
+    position: absolute !important;
+    left: 5px !important;
+    top: -5px !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    border: none !important;
+    margin: 0 !important;
+    display: block !important;
+    width: 53px !important;
+    height: 63px !important;
+    min-width: 53px !important;
+    max-width: 53px !important;
+    min-height: 63px !important;
+    max-height: 63px !important;
+    object-fit: contain !important;
+    z-index: 10 !important;
+}
+
+/* 通知栏图标包装器 */
+.notice__led__15X-v .home__title__vakp6 > div {
+    width: 53px !important;
+    height: 63px !important;
+    position: relative !important;
+    display: block !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    z-index: 10 !important;
+}
+
+/* 通知栏图标 */
+.notice__led__15X-v .home__title__vakp6 img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    border: none !important;
+    margin: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    z-index: 10 !important;
+}
+
+/* 通知栏内容区域 */
+.notice__led__15X-v .home__notice_box__MTDrm {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+    min-width: 0 !important;
+    background: transparent !important;
+}
+
+/* 滚动文本容器 */
+.notice__led__15X-v .home__notice__2dv3X {
+    flex: 1 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    position: relative !important;
+    background: transparent !important;
+}
+
+/* 滚动文本 */
+.notice__led__15X-v .home__marquee__3d0Ok {
+    display: flex !important;
+    align-items: center !important;
+    height: 40px !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+/* 通知栏文字 */
+.notice__led__15X-v .home__marquee__3d0Ok a {
+    height: 40px !important;
+    line-height: 40px !important;
+    color: #333 !important;
+    font-size: 14px !important;
+    white-space: nowrap !important;
+}
+
+/* 更多按钮容器 */
+.notice__led__15X-v .home__cuorster__17Pr8 {
+    position: relative !important;
+    width: 96px !important;
+    text-align: right !important;
+    padding-left: 10px !important;
+    flex-shrink: 0 !important;
+    z-index: 2 !important;
+    background: transparent !important;
+}
+
+/* 更多按钮 */
+.notice__more__2MgRR {
+    background: #ffffff !important;
+    border: 1px solid #179cff !important;
+    color: #179cff !important;
+    transition: all 0.3s ease !important;
+    padding: 0 15px !important;
+    height: 30px !important;
+    line-height: 28px !important;
+    border-radius: 15px !important;
+    font-size: 14px !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+    margin-top: -5px !important;
+}
+
+.notice__more__2MgRR:hover {
+    background: #179cff !important;
+    color: #ffffff !important;
+}
+
+/* 标题图片样式 */
+img[data-v-78dec126][src*="data:image/png;base64"] {
+    width: 53px !important;
+    height: 63px !important;
+    max-width: 53px !important;
+    max-height: 63px !important;
+    min-width: 53px !important;
+    min-height: 63px !important;
+    transform: scale(1) !important;
+    object-fit: contain !important;
+}
+
+/* 移除通知栏内容区域背景 */
+.notice__led__15X-v > section > div {
+    background-color: transparent !important;
+    background: none !important;
+}
+
+/* 设置图片宽度和位置 */
+img[data-v-78dec126][src*="shoujiappxiazai"],
+img[data-v-78dec126][src*="games_title"] {
+    width: 1300px !important;
+    max-width: 1300px !important;
+    height: auto !important;
+}
+
+/* 调整service图片位置 */
+img[data-v-78dec126][src*="service"] {
+    margin-top: -40px !important;
+    display: block !important;
+} 

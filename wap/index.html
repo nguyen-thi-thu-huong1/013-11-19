@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang=zh-CN><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content=edge><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><title></title><style>*{
+			font-size: 12px;
+		}
+		#redPacket {
+			position: fixed;
+			right: 12px;
+			bottom: 60px;
+			width: 75px;
+			height: 85px;
+			z-index: 999;
+			cursor: pointer;
+			background: url(/static/image/red-packet.png);
+			background-size: 100% 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#redPacket .grab {
+
+			margin-top: 20px;
+			width: 35px;
+			height: 20px;
+			padding-top: 20px;
+			background: url(/static/image/grab.png)no-repeat center;
+			background-size: 100% 100%;
+			-webkit-animation: scaleDraw .4s linear infinite;
+		}
+
+		#redPacket img {
+			position: absolute;
+			top: 0;
+			right: -10px;
+			width: 20px;
+			-webkit-filter: grayscale(100%);
+			-moz-filter: grayscale(100%);
+			-ms-filter: grayscale(100%);
+			-o-filter: grayscale(100%);
+			filter: grayscale(100%);
+			filter: gray;
+
+		}
+
+		@keyframes scaleDraw {
+			25% {
+				transform: scale(1.1);
+			}
+
+			50% {
+				transform: scale(1.2);
+			}
+
+			75% {
+				transform: scale(1.1);
+			}
+
+			100% {
+				transform: scale(1);
+			}
+		}
+
+		.rigts {
+			display: block !important;
+			width: 100% !important;
+			margin-top: 0 !important;
+			padding-top: 0 !important;
+		}
+
+		.rigts img {
+			display: block !important;
+			width: 100% !important;
+			max-width: 100% !important;
+			margin: 9px 0 !important;
+			aspect-ratio: 8 / 3 !important;
+			height: auto !important;
+			object-fit: cover !important;
+			border-radius: 16px !important;
+			background: none !important;
+			border: 2px solid #fff !important;
+			box-shadow: none !important;
+			padding: 0 !important;
+			transition: box-shadow 0.3s, transform 0.3s !important;
+		}
+
+		.rigts img:hover {
+			box-shadow: 0 6px 18px rgba(0,0,0,0.16) !important;
+			transform: translateY(-4px) scale(1.03) !important;
+		}
+
+		.gameBoxs {
+			display: flex;
+			align-items: flex-start;
+		}
+
+		.lfst {
+			margin-top: 0 !important;
+			padding-top: 0 !important;
+		}</style><link rel=stylesheet type=text/css href=/static/css/custom.css><link rel=stylesheet type=text/css href=/static/css/custom-new.css><script src=/static/js/jquery-1.8.2.js></script><script src=/static/js/swiper.min.js></script><link href=/static/css/app.a73885b0c6ba7cb827dd25d2bead6bf6.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script><script type=text/javascript src=/static/js/vendor.3077b2724a0beda19d02.js></script><script type=text/javascript src=/static/js/app.11f9cb432be59f6bdaea.js></script><script type=text/javascript src=/static/js/custom.js></script><script type=text/javascript src=/static/js/custom-new.js></script></body></html><script></script>

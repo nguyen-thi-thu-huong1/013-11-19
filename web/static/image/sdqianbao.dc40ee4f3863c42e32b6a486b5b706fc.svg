@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <filter id="1m3lx4n6jc" width="276.5%" height="330.8%" x="-88.2%" y="-115.4%" filterUnits="objectBoundingBox">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+        </filter>
+        <filter id="2bygobbhbe" width="284.6%" height="284.6%" x="-92.3%" y="-92.3%" filterUnits="objectBoundingBox">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+        </filter>
+        <linearGradient id="h10t0acztb" x1="1.122%" x2="100%" y1="88.219%" y2="88.219%">
+            <stop offset="0%" stop-color="#8CA7FF"/>
+            <stop offset="100%" stop-color="#597EF7"/>
+        </linearGradient>
+        <circle id="itehxhxaea" cx="20" cy="20" r="20"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="uh4jmtry7d" fill="#fff">
+            <use xlink:href="#itehxhxaea"/>
+        </mask>
+        <use fill="url(#h10t0acztb)" xlink:href="#itehxhxaea"/>
+        <ellipse cx="20" cy="37" fill="#8CA9FF" filter="url(#1m3lx4n6jc)" mask="url(#uh4jmtry7d)" rx="17" ry="13"/>
+        <circle cx="20.5" cy="41.5" r="6.5" fill="#95CBFF" filter="url(#2bygobbhbe)" mask="url(#uh4jmtry7d)"/>
+        <path fill="#FFF" fill-rule="nonzero" d="M26.129 11C27.675 11 29 12.33 29 13.88v3.157h-6.3c-.131-.01-2.7-.136-2.7 3.101 0 3.102 2.485 2.88 2.485 2.936h6.46v3.046c0 1.55-1.325 2.88-2.871 2.88H13.87C12.325 29 11 27.67 11 26.12V13.88c0-1.55 1.325-2.88 2.871-2.88zm2.65 6.868v4.154h-5.687s-1.932.221-1.932-1.939c0-2.326 2.098-2.16 2.098-2.215h5.521zm-5.466 1.274c-.387 0-.718.332-.773.72 0 .276.166.553.386.664.221.11.497.11.718 0 .221-.166.387-.388.387-.664 0-.388-.332-.72-.718-.72z"/>
+    </g>
+</svg>

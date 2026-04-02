@@ -1,0 +1,49 @@
+/* 电脑端样式覆盖 */
+
+/* 覆盖原有样式 */
+body {
+    min-width: 1200px;
+    overflow-x: auto;
+}
+
+/* 覆盖移动端样式 */
+@media screen and (max-width: 768px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
+
+/* 强制显示电脑端元素 */
+.pc-only {
+    display: block !important;
+}
+
+/* 覆盖响应式布局 */
+.container {
+    width: 1200px !important;
+    max-width: none !important;
+    padding: 0 15px !important;
+}
+
+/* 覆盖导航栏样式 */
+.navbar {
+    height: 60px !important;
+}
+
+/* 覆盖按钮样式 */
+.btn {
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+}
+
+/* 覆盖表格样式 */
+table {
+    width: 100% !important;
+    table-layout: fixed !important;
+}
+
+/* 覆盖图片样式 */
+img {
+    max-width: 100% !important;
+    height: auto !important;
+} 
