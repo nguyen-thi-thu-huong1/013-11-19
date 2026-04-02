@@ -1,0 +1,34 @@
+name: DEPLOY
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy to h12368.com
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            cd ${{ secrets.DEPLOY_PATH }}
+            git fetch --all
+            git reset --hard origin/master
+            cd admin
+            composer install --no-dev --optimize-autoloader
+            php artisan migrate --force
+            php artisan cache:clear
+            php artisan config:cache
+            php artisan route:cache
+            chown -R www:www ../
