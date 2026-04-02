@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class BetReportController extends AdminController
 {
-    protected $title = '下注统计';
+    protected $title = 'Betting Statistics';
     /**
      * Make a grid builder.
      *
@@ -22,16 +22,16 @@ class BetReportController extends AdminController
         return Grid::make(new User(), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('username');
-            $grid->column('bet_times','下注次数')->display(function (){
+            $grid->column('bet_times','Bet Count')->display(function (){
                 return $this->betTimes();
             });
-            $grid->column('bet_sum','投注总金额')->display(function (){
+            $grid->column('bet_sum','Total Bet Amount')->display(function (){
                 return $this->betSum();
             });
-            $grid->column('valid_bet_sum','有效投注总金额')->display(function (){
+            $grid->column('valid_bet_sum','Total Valid Bet Amount')->display(function (){
                 return $this->vaildBetSum();
             });
-            $grid->column('win_loss','输赢总金额')->display(function (){
+            $grid->column('win_loss','Total Win/Loss Amount')->display(function (){
                 return $this->winLoss();
             });
         

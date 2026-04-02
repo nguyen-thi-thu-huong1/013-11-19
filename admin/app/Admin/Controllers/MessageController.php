@@ -11,11 +11,11 @@ use App\Models\UserVip;
 
 class MessageController extends AdminController
 {
-    protected $type = [1 => '通知',2 => '活动',3 => '公告'];
+    protected $type = [1 => 'Notification',2 => 'Activity',3 => 'Announcement'];
     
     protected $vip =[];
     
-    protected $isagent = [1 => '代理'];
+    protected $isagent = [1 => 'Agent'];
 
     /**
      * Make a grid builder.
@@ -70,18 +70,18 @@ class MessageController extends AdminController
            
             $form->select('type')->options($this->type)->required();
             
-             //vip等级
+             // VIP level
             $settlements = UserVip::all();
             $options = [];
             foreach ($settlements as $k => $v) {
                 $options[$v->id] = $v->vipname;
             }
             
-            $form->select('vip_id','vip等级')->options($options)->required();
+            $form->select('vip_id','VIP Level')->options($options)->required();
             
-            $form->select('isagent','发送目标')->options($this->isagent)->required();
+            $form->select('isagent','Send To')->options($this->isagent)->required();
             
-            $form->number('user_id','用户id')->required();
+            $form->number('user_id','User ID')->required();
             
             $form->text('title')->required();
             $form->editor('content');

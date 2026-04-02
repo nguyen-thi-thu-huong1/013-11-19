@@ -11,9 +11,9 @@ use Dcat\Admin\Http\Controllers\AdminController;
 class RedEnvelopesController extends AdminController
 {
 
-    public $title = '红包管理';
+    public $title = 'Red Packet Management';
 
-    protected $state = [1 => '启用',0 => '禁用'];
+    protected $state = [1 => 'Active',0 => 'Disabled'];
     /**
      * Make a grid builder.
      *
@@ -24,12 +24,12 @@ class RedEnvelopesController extends AdminController
 
         return Grid::make(new RedEnvelopes(), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('day_flow','充值金额起始');
-            $grid->column('flow_money','充值金额结束');
-            $grid->column('money','领取红包比例');
-            $grid->column('recharge','红包个数');
-            $grid->column('start_time','红包领取开始时间');
-            $grid->column('end_time','红包领取结束时间');
+            $grid->column('day_flow','Min Deposit Amount');
+            $grid->column('flow_money','Max Deposit Amount');
+            $grid->column('money','Red Packet Rate');
+            $grid->column('recharge','Red Packet Count');
+            $grid->column('start_time','Claim Start Time');
+            $grid->column('end_time','Claim End Time');
             $grid->column('status')->using($this->state);
             $grid->column('created_at');
 
@@ -55,11 +55,11 @@ class RedEnvelopesController extends AdminController
     {
         return Show::make($id, new RedEnvelopes(), function (Show $show) {
             $show->field('id');
-            $show->field('day_flow','充值金额起始');
-            $show->field('flow_money','充值金额结束');
-            $show->field('money','领取红包比例');
-            $show->field('recharge','领取红包个数');
-            $show->field('recharge','状态');
+            $show->field('day_flow','Min Deposit Amount');
+            $show->field('flow_money','Max Deposit Amount');
+            $show->field('money','Red Packet Rate');
+            $show->field('recharge','Red Packet Count');
+            $show->field('recharge','Status');
         });
     }
 
@@ -72,13 +72,13 @@ class RedEnvelopesController extends AdminController
     {
         return Form::make(new RedEnvelopes(), function (Form $form) {
             $form->display('id');
-            $form->currency('day_flow','充值金额起始')->symbol('￥');
-            $form->currency('flow_money','充值金额结束')->symbol('￥');
-            $form->currency('money','领取红包比例')->symbol('%');
-            $form->text('recharge','领取红包个数');
+            $form->currency('day_flow','Min Deposit Amount')->symbol('￥');
+            $form->currency('flow_money','Max Deposit Amount')->symbol('￥');
+            $form->currency('money','Red Packet Rate')->symbol('%');
+            $form->text('recharge','Red Packet Count');
 
-            $form->radio('status','状态')->options([1 => '可用',0 => '禁用'])->default(1);
-            $form->datetimeRange('start_time', 'end_time', '活动时间');
+            $form->radio('status','Status')->options([1 => 'Active',0 => 'Disabled'])->default(1);
+            $form->datetimeRange('start_time', 'end_time', 'Activity Duration');
 
             $form->display('created_at');
             $form->display('updated_at');

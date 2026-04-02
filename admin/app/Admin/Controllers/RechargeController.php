@@ -13,7 +13,7 @@ use App\Admin\Actions\Grid\Recharge\Refuse;
 class RechargeController extends AdminController
 {
 
-    protected $pay_way = [1 => '银行卡转账', 2 => 'ZGPAY支付', 3 => '支付宝扫描支付', 4 => '微信扫描支付', 5 => 'USDT-TRC20',6 => 'USDT-ERC20', 10 => '充值赠送',11 => '代理充值'];
+    protected $pay_way = [1 => 'Bank Transfer', 2 => 'ZGPAY Payment', 3 => 'Alipay QR Payment', 4 => 'WeChat QR Payment', 5 => 'USDT-TRC20',6 => 'USDT-ERC20', 10 => 'Deposit Bonus',11 => 'Agent Deposit'];
     /**
      * Make a grid builder.
      *
@@ -26,29 +26,29 @@ class RechargeController extends AdminController
             $grid->column('id')->sortable();
             //$grid->column('order_no');
             //$grid->column('out_trade_no');
-            $grid->column('user_data.username', '用户名')->view('admin.field.user_username');
+            $grid->column('user_data.username', 'Username')->view('admin.field.user_username');
             //$grid->column('amount');
             
-            $grid->column('amount','充值金额');
+            $grid->column('amount','Deposit Amount');
             $grid->column('pay_way')->using($this->pay_way);
-            //$grid->column('usdt_type','协议类型');
-            $grid->column('usdt_rate','汇率');
-            $grid->column('real_money','实际支付');
+            //$grid->column('usdt_type','Protocol Type');
+            $grid->column('usdt_rate','Exchange Rate');
+            $grid->column('real_money','Actual Payment');
 
             
             
             //$grid->column('bank_no');
-            $grid->column('state')->using([1 => '待审核', 2 => '已完成', 3 => '已拒绝']);
+            $grid->column('state')->using([1 => 'Pending', 2 => 'Completed', 3 => 'Rejected']);
             $grid->column('created_at');
 
-            //名字搜索
+            // Name search
             // $grid->quickSearch('user_data.username');
 
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-                $filter->equal('user_data.username', "用户名");
-                $filter->between('created_at', '日期')->date();
+                $filter->equal('user_data.username', "Username");
+                $filter->between('created_at', 'Date')->date();
                 $filter->equal('pay_way')->select($this->pay_way);
             });
             $grid->disableCreateButton();
@@ -82,12 +82,12 @@ class RechargeController extends AdminController
             $show->field('real_money');
             $show->field('pay_way')->using($this->pay_way);
             
-            $show->field('bank_no','银行卡号');
+            $show->field('bank_no','Bank Card Number');
             $show->field('bank');
             $show->field('bank_address');
-            $show->field('bank_owner','姓名/USDT地址');
+            $show->field('bank_owner','Name / USDT Address');
             $show->field('info');
-            $show->field('state')->using([1 => '待审核', 2 => '已完成', 3 => '已拒绝']);
+            $show->field('state')->using([1 => 'Pending', 2 => 'Completed', 3 => 'Rejected']);
             $show->field('created_at');
 
             $show->panel()

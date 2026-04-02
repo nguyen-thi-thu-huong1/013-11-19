@@ -12,7 +12,7 @@ use App\Admin\Actions\Grid\Withdraw\Refuse;
 
 class WithdrawController extends AdminController
 {
-    protected $title = '提现审核';
+    protected $title = 'Withdrawal Review';
     /**
      * Make a grid builder.
      *
@@ -24,27 +24,27 @@ class WithdrawController extends AdminController
             $grid->model()->orderBy('id', 'desc');
             $grid->column('id')->sortable();
             //$grid->column('order_no');
-            $grid->column('user_data.username','用户名');
-            $grid->column('card_data.bank_owner','姓名/协议');
+            $grid->column('user_data.username','Username');
+            $grid->column('card_data.bank_owner','Name / Protocol');
             
-            //$grid->column('card_data.bank_no','提款信息');
+            //$grid->column('card_data.bank_no','Withdrawal Info');
             
             
-            $grid->column('amount','提款金额');
-            $grid->column('type','提款方式')->using([0 => '未记录',1 => '银行卡',2 => 'USDT-TRC20',3 => 'USDT-ERC20']);
-            $grid->column('usdt_rate','汇率');
+            $grid->column('amount','Withdrawal Amount');
+            $grid->column('type','Withdrawal Method')->using([0 => 'Not Recorded',1 => 'Bank Card',2 => 'USDT-TRC20',3 => 'USDT-ERC20']);
+            $grid->column('usdt_rate','Exchange Rate');
             $grid->column('cash_fee');
-            $grid->column('real_money','实际提款');
+            $grid->column('real_money','Actual Withdrawal');
             
-            $grid->column('state')->using([1 => '待审核',2 => '已完成',3 => '已拒绝',4 => '存在错误']);
+            $grid->column('state')->using([1 => 'Pending',2 => 'Completed',3 => 'Rejected',4 => 'Error']);
             $grid->column('created_at');
 
             $grid->disableCreateButton();
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-                $filter->equal('user_data.username','用户名');
-                $filter->between('created_at', '日期')->date();
+                $filter->equal('user_data.username','Username');
+                $filter->between('created_at', 'Date')->date();
             });
             $grid->actions(function (Grid\Displayers\Actions $actions) {
                 $actions->disableEdit();
@@ -70,13 +70,13 @@ class WithdrawController extends AdminController
             $show->field('id');
             $show->field('order_no');
             $show->field('card_id');
-            $show->field('user_data.username','用户名');
-            $show->field('card_data.bank_owner','姓名/协议');
-            $show->field('type','提款方式')->using([0 => '未记录',1 => '银行卡',2 => 'USDT-TRC20']);
-            $show->field('card_data.bank_no','卡号/USDT');
+            $show->field('user_data.username','Username');
+            $show->field('card_data.bank_owner','Name / Protocol');
+            $show->field('type','Withdrawal Method')->using([0 => 'Not Recorded',1 => 'Bank Card',2 => 'USDT-TRC20']);
+            $show->field('card_data.bank_no','Card No. / USDT');
             $show->field('amount');
             $show->field('cash_fee');
-            $show->field('real_money','实际提款');
+            $show->field('real_money','Actual Withdrawal');
             
             $show->field('info');
             $show->field('state');

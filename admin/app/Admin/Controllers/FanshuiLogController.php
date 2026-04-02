@@ -11,7 +11,7 @@ use App\Services\TgService;
 
 class FanshuiLogController extends AdminController
 {
-    protected $title = '返水记录';
+    protected $title = 'Cashback Records';
     
     /**
      * Make a grid builder.
@@ -25,20 +25,20 @@ class FanshuiLogController extends AdminController
         return Grid::make(TransferLog::with(['user_data']), function (Grid $grid) use ($gamelist) {
             $grid->model()->where('transfer_type', 6)->orderBy('id', 'desc');
             $grid->column('id')->sortable();
-            $grid->column('user_data.username','用户名');
-            $grid->column('platform_type','平台名称')->display(function ($platform_type) use ($gamelist){
+            $grid->column('user_data.username','Username');
+            $grid->column('platform_type','Platform Name')->display(function ($platform_type) use ($gamelist){
                 return $gamelist[$platform_type] ?? '';
             });
-            $grid->column('state','状态')->using([1 => '已领取',0 => '未领取']);
-            $grid->column('money','返水金额');
+            $grid->column('state','Status')->using([1 => 'Claimed',0 => 'Unclaimed']);
+            $grid->column('money','Cashback Amount');
             $grid->column('created_at');
-            $grid->column('updated_at','领取时间')->display(function (){
-                return ($this->state) ? date('Y-m-d H:i:s',strtotime($this->updated_at)) : ' 暂无领取';
+            $grid->column('updated_at','Claim Time')->display(function (){
+                return ($this->state) ? date('Y-m-d H:i:s',strtotime($this->updated_at)) : ' Not yet claimed';
             });
             $grid->disableActions();
             $grid->disableCreateButton();
             $grid->filter(function (Grid\Filter $filter) {
-                $filter->equal('user_data.username','用户名');
+                $filter->equal('user_data.username','Username');
                 $filter->between('created_at')->datetime();
             });
         });

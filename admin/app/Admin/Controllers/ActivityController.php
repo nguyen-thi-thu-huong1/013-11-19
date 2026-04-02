@@ -11,7 +11,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 class ActivityController extends AdminController
 {
 
-    protected $type = [1 => '充值赠送'];
+    protected $type = [1 => 'Deposit Bonus'];
     /**
      * Make a grid builder.
      *
@@ -23,14 +23,14 @@ class ActivityController extends AdminController
             $grid->model()->orderBy('id', 'desc');
             $grid->column('id')->sortable();
             
-            $grid->column('type_data.name','活动类型');
+            $grid->column('type_data.name','Activity Type');
             $grid->column('title');
             $grid->column('entitle');
             //$grid->column('content');
             $grid->column('apply_count');
             //$grid->column('banner');
-            $grid->column('can_apply')->using([1 => '可申请',0 => '不可申请']);
-            $grid->column('state')->using([1 => '正常',0 => '禁用']);
+            $grid->column('can_apply')->using([1 => 'Applicable',0 => 'Not Applicable']);
+            $grid->column('state')->using([1 => 'Active',0 => 'Disabled']);
             $grid->column('created_at');
             // $grid->column('updated_at')->sortable();
 
@@ -86,12 +86,12 @@ class ActivityController extends AdminController
             $form->text('entitle')->required();
             $form->editor('content')->required();
             $form->editor('encontent')->required();
-            $form->editor('memo','活动条款与规则')->required();
-            $form->editor('enmemo','活动条款与规则')->required();
+            $form->editor('memo','Activity Terms & Rules')->required();
+            $form->editor('enmemo','Activity Terms & Rules')->required();
             $form->number('apply_count');
             $form->image('banner')->uniqueName()->retainable();
-            $form->radio('can_apply')->options([1 => '可申请',0 => '不可申请'])->default(1);
-            $form->radio('state')->options([1 => '正常',0 => '禁用'])->default(1);
+            $form->radio('can_apply')->options([1 => 'Applicable',0 => 'Not Applicable'])->default(1);
+            $form->radio('state')->options([1 => 'Active',0 => 'Disabled'])->default(1);
 
             $form->display('created_at');
             $form->display('updated_at');

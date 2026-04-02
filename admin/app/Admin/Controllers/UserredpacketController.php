@@ -10,7 +10,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class UserredpacketController extends AdminController
 {
-    protected $title = "会员红包领取列表";
+    protected $title = "Member Red Packet Claim List";
     /**
      * Make a grid builder.
      *
@@ -21,12 +21,12 @@ class UserredpacketController extends AdminController
         return Grid::make(Userredpacket::with(['user_data']), function (Grid $grid) {
             $grid->model()->orderBy('id', 'desc');
             $grid->column('id','ID')->sortable();
-            $grid->column('user_data.username','用户名');
-            $grid->column('redpacketfee','红包比例');
-            $grid->column('money','充值金额');
-            $grid->column('redpacketmoney','红包金额');
-            $grid->column('status','状态')->using([0 => '待领取',1 => '已领取']);;
-            $grid->column('usetime','领取时间');
+            $grid->column('user_data.username','Username');
+            $grid->column('redpacketfee','Red Packet Rate');
+            $grid->column('money','Deposit Amount');
+            $grid->column('redpacketmoney','Red Packet Amount');
+            $grid->column('status','Status')->using([0 => 'Pending Claim',1 => 'Claimed']);;
+            $grid->column('usetime','Claim Time');
             $grid->column('created_at');
 
             $grid->filter(function (Grid\Filter $filter) {

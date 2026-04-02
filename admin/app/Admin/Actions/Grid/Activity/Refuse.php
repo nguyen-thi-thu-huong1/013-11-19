@@ -16,7 +16,7 @@ class Refuse extends RowAction
     /**
      * @return string
      */
-	protected $title = '拒绝';
+	protected $title = 'Reject';
 
     /**
      * Handle the action request.
@@ -36,7 +36,7 @@ class Refuse extends RowAction
         $activity->save();
 
         return $this->response()
-            ->success('审核成功')
+            ->success('Approved')
             ->refresh();
     }
 

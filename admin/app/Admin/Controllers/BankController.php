@@ -10,7 +10,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class BankController extends AdminController
 {
-    protected $state = [1 => '可用',0 => '禁用'];
+    protected $state = [1 => 'Active',0 => 'Disabled'];
     /**
      * Make a grid builder.
      *

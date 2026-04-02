@@ -16,7 +16,7 @@ class Pass extends RowAction
     /**
      * @return string
      */
-	protected $title = '通过';
+	protected $title = 'Approve';
 
     /**
      * Handle the action request.
@@ -36,7 +36,7 @@ class Pass extends RowAction
         $activity->save();
 
         return $this->response()
-            ->success('审核成功')
+            ->success('Approved')
             ->refresh();
     }
 

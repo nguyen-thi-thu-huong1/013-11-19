@@ -22,11 +22,11 @@ class UserVipController extends AdminController
             $grid->column('vipname');
 
             //$grid->column('viptype');
-            $grid->column('recharge','充值累计');
-            $grid->column('flow','流水累计');
+            $grid->column('recharge','Cumulative Deposits');
+            $grid->column('flow','Cumulative Wagering');
 /*
-            $grid->column('vrbetfee','Vebet返水(%)');
-            $grid->column('ldfee','雷火返水(%)');*/
+            $grid->column('vrbetfee','Vebet Cashback (%)');
+            $grid->column('ldfee','Raijin Cashback (%)');*/
             $grid->column('realperson');
              $grid->column('electron');
             $grid->column('joker');
@@ -34,8 +34,8 @@ class UserVipController extends AdminController
             // $grid->column('fish');
             $grid->column('lottery');
             $grid->column('e_sport');
-            $grid->column('status')->using([1 => '正常',0 => '禁用']);
-            $grid->column('vippic','对应等级图片');
+            $grid->column('status')->using([1 => 'Active',0 => 'Disabled']);
+            $grid->column('vippic','Level Badge Image');
             $grid->column('created_at');
             // $grid->column('updated_at')->sortable();
 
@@ -86,8 +86,8 @@ class UserVipController extends AdminController
             $form->display('id');
             $form->text('vipname')->required();
             $form->hidden('viptype')->default(1);
-            $form->decimal('recharge','充值累计');
-            $form->decimal('flow','流水累计');
+            $form->decimal('recharge','Cumulative Deposits');
+            $form->decimal('flow','Cumulative Wagering');
             $form->decimal('electron');
             $form->decimal('realperson');
             $form->decimal('joker');
@@ -95,9 +95,9 @@ class UserVipController extends AdminController
             // $form->decimal('fish');
             $form->decimal('lottery');
             $form->decimal('e_sport');
-            $form->radio('status')->options([1 => '可用',0 => '禁用'])->default(1);
+            $form->radio('status')->options([1 => 'Active',0 => 'Disabled'])->default(1);
             //$form->number('exp');
-            $form->radio('is_default')->options([1 => '是',0 => '否'])->default(0);
+            $form->radio('is_default')->options([1 => 'Yes',0 => 'No'])->default(0);
             $form->text('vippic');
             $form->display('created_at');
             $form->display('updated_at');

@@ -11,7 +11,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 class UserOperateLogController extends AdminController
 {
 
-    protected $type = [1 => '登入',2 => '登出', 3 => '会员操作', 4 => '代理后台登入', 5 => '代理后台登出', 6 => '会员转入接口异常'];
+    protected $type = [1 => 'Login',2 => 'Logout', 3 => 'Member Operation', 4 => 'Agent Panel Login', 5 => 'Agent Panel Logout', 6 => 'Member Transfer Interface Error'];
     /**
      * Make a grid builder.
      *
@@ -22,7 +22,7 @@ class UserOperateLogController extends AdminController
         return Grid::make(new UserOperateLog(['user_data']), function (Grid $grid) {
             $grid->model()->orderBy('id','desc');
             $grid->column('id')->sortable();
-            $grid->column('user_data.username','用户名');
+            $grid->column('user_data.username','Username');
             $grid->column('type')->using($this->type);
             // $grid->column('login_ua');
             $grid->column('login_ip');
@@ -37,7 +37,7 @@ class UserOperateLogController extends AdminController
             });
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-                $filter->equal('user_data.username','用户名');
+                $filter->equal('user_data.username','Username');
                 $filter->equal('type')->select($this->type);
             });
         });

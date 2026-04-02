@@ -10,7 +10,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class BetSumController extends AdminController
 {
-    protected $title = '下注汇总';
+    protected $title = 'Betting Summary';
     /**
      * Make a grid builder.
      *

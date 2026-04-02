@@ -14,7 +14,7 @@ use App\Admin\Tools\AgentFanyong;
 
 class AgentCommissionController extends AdminController
 {
-    protected $title = '代理佣金报表';
+    protected $title = 'Agent Commission Report';
     /**
      * Make a grid builder.
      *
@@ -26,17 +26,17 @@ class AgentCommissionController extends AdminController
             $grid->model()->where('isagent',1);
             // $grid->column('id')->sortable();
             $grid->column('username');
-            //$grid->column('结算方案');
-            $grid->column('child_count','有效会员数')->display(function (){
+            //$grid->column('Settlement Plan');
+            $grid->column('child_count','Active Members')->display(function (){
                 return $this->agentbetTimes();
             });
-            $grid->column('bet_sum','总有效投注')->display(function (){
+            $grid->column('bet_sum','Total Valid Bets')->display(function (){
                 return $this->agentbetSum();
             });
-            $grid->column('valid_bet_sum','总盈利')->display(function (){
+            $grid->column('valid_bet_sum','Total Profit')->display(function (){
                 return $this->agentvaildBetSum();
             });
-            $grid->column('win_loss','总获返利')->display(function (){
+            $grid->column('win_loss','Total Rebate Earned')->display(function (){
                 return $this->agentwinLoss();
             });
             // $grid->disableActions();

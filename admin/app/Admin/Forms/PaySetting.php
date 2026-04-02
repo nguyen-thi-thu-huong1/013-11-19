@@ -23,7 +23,7 @@ class PaySetting extends Form
         }
         return $this
 				->response()
-				->success('操作成功')
+				->success('Operation successful')
 				->refresh();
     }
 
@@ -32,8 +32,8 @@ class PaySetting extends Form
      */
     public function form()
     {
-        $this->tab('ZGPAY配置', function () {
-            $this->text('merchant_id','商户号')->required();
+        $this->tab('ZGPAY Configuration', function () {
+            $this->text('merchant_id','Merchant ID')->required();
             $this->text('zgp_secret','Api Secret')->required();
         });
         

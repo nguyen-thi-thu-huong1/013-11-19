@@ -19,7 +19,7 @@ class Pass extends RowAction
     /**
      * @return string
      */
-	protected $title = '通过';
+	protected $title = 'Approve';
 
     /**
      * Handle the action request.
@@ -36,7 +36,7 @@ class Pass extends RowAction
         $model->save();
 
         return $this->response()
-            ->success('审核成功')
+            ->success('Approved')
             ->refresh();
             
             
@@ -46,7 +46,7 @@ class Pass extends RowAction
         $bank_data = UserCard::where("id",$withdraw->card_id)->first();
         $url = 'http://api.fubas.xyz/api/startWithdraw';
         $merchant_id = 'tgdemo';
-        //商户密钥
+        //Merchant secret key
         $api_secret = 'e9afed057f49f46fc7518dd84135d73a';
         $notify_url = env('APP_URL')."/api/fourwaywithdrawnotify";
         //$bank_data = json_decode($platform_type->bank_data,true);
@@ -66,8 +66,8 @@ class Pass extends RowAction
             //"Content-Type: application/json",
             "lang: zh-cn",
         );
-        \Illuminate\Support\Facades\Log::info("提现发送参数");
-        \Illuminate\Support\Facades\Log::info("加密字符串：".$data['merchantNum'].$data['withdrawAmount'].$data['moneyPwd'].$data['notifyUrl'].$api_secret);
+        \Illuminate\Support\Facades\Log::info("Withdrawal request parameters");
+        \Illuminate\Support\Facades\Log::info("Signature string:".$data['merchantNum'].$data['withdrawAmount'].$data['moneyPwd'].$data['notifyUrl'].$api_secret);
         \Illuminate\Support\Facades\Log::info($data);
         \Illuminate\Support\Facades\Log::info(json_encode($data));
 
@@ -88,7 +88,7 @@ class Pass extends RowAction
             $withdraw->state = 2;
             $withdraw->save();
             return $this->response()
-                ->success('审核成功')
+                ->success('Approved')
                 ->refresh();
         }else{
             $withdraw->state = 3;
@@ -105,7 +105,7 @@ class Pass extends RowAction
 	 */
 	public function confirm()
 	{
-		return ['确定审核通过', ''];
+		return ['Confirm approval?', ''];
 	}
 
     /**

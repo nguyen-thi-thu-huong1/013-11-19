@@ -32,28 +32,28 @@ class UserController extends AdminController
             $grid->column('username')->view('admin.field.user_username');
             // $grid->column('password');
             $grid->column('realname');
-            $grid->column('vip', '等级')->display(function ($vip) {
+            $grid->column('vip', 'Level')->display(function ($vip) {
                 $vipinfo = UserVip::find($vip);
-                return ($vipinfo) ? $vipinfo->vipname : '注册会员';
+                return ($vipinfo) ? $vipinfo->vipname : 'Registered Member';
             });
             //$grid->column('level');
             // $grid->column('paypwd');
             // $grid->column('isonline');
             $grid->column('isagent');
-            $grid->column('isagent')->using([1 => '是', 0 => '否']);
+            $grid->column('isagent')->using([1 => 'Yes', 0 => 'No']);
             //$grid->column('allowagent');
-            //$grid->column('reg_ip','注册IP');
+            //$grid->column('reg_ip','Registration IP');
             $grid->column('balance');
             $grid->column('mbalance');
             // $grid->column('phone');
             // $grid->column('mail');
             $grid->column('paysum');
-            $grid->column('status')->using([1 => '正常', 0 => '禁用']);
-            $grid->column('wallet_balance', '游戏余额')
-                ->display('接口余额') // 设置按钮名称
+            $grid->column('status')->using([1 => 'Active', 0 => 'Disabled']);
+            $grid->column('wallet_balance', 'Game Balance')
+                ->display('API Balance') // Set button label
                 ->modal(function ($modal) {
-                    // 设置弹窗标题
-                    $modal->title('游戏余额');
+                    // Set modal title
+                    $modal->title('Game Balance');
                     $res = UserBalance::make(['id' => $this->username]);
                     return $res;
                 });
@@ -70,20 +70,20 @@ class UserController extends AdminController
             $grid->column('created_at');
             // $grid->column('updated_at')->sortable();
 
-            //按钮筛选
+            // Button filters
             // $grid->selector(function (Grid\Tools\Selector $selector) {
-            //     $selector->select('isagent', '代理会员', [
-            //         0 => '非代理会员',
-            //         1 => '代理会员',
+            //     $selector->select('isagent', 'Agent Member', [
+            //         0 => 'Non-Agent Member',
+            //         1 => 'Agent Member',
             //     ]);
-            //     $selector->select('isonline', '是否在线', [
-            //         0 => '不在线',
-            //         1 => '在线',
+            //     $selector->select('isonline', 'Online Status', [
+            //         0 => 'Offline',
+            //         1 => 'Online',
             //     ]);
             // });
 
             $grid->actions(function (Grid\Displayers\Actions $actions) {
-                // append一个操作
+                // Append an action
                 $actions->append(new Balance());
                 $actions->append(new BackBalance());
             });
@@ -91,13 +91,13 @@ class UserController extends AdminController
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
                 $filter->equal('username');
-                $filter->equal('isagent', '代理会员')->select([
-                    0 => '非代理会员',
-                    1 => '代理会员',
+                $filter->equal('isagent', 'Agent Member')->select([
+                    0 => 'Non-Agent Member',
+                    1 => 'Agent Member',
                 ]);
-                $filter->equal('isonline', '是否在线')->select([
-                    0 => '不在线',
-                    1 => '在线',
+                $filter->equal('isonline', 'Online Status')->select([
+                    0 => 'Offline',
+                    1 => 'Online',
                 ]);
             });
         });
@@ -121,17 +121,17 @@ class UserController extends AdminController
             $show->field('vip');
             $show->field('level');
             // $show->field('paypwd');
-            $show->field('isonline')->using([1 => '在线', 0 => '离线']);
-            $show->field('isagent')->using([1 => '是', 0 => '否']);
-            $show->field('allowagent')->using([1 => '是', 0 => '否']);
+            $show->field('isonline')->using([1 => 'Online', 0 => 'Offline']);
+            $show->field('isagent')->using([1 => 'Yes', 0 => 'No']);
+            $show->field('allowagent')->using([1 => 'Yes', 0 => 'No']);
             $show->field('balance');
             $show->field('mbalance');
             $show->field('phone');
             $show->field('mail');
             $show->field('paysum');
-            $show->field('status')->using([1 => '正常', 0 => '禁用']);
-            $show->field('isdel')->using([1 => '是', 0 => '否']);
-            $show->field('isblack')->using([1 => '是', 0 => '否']);
+            $show->field('status')->using([1 => 'Active', 0 => 'Disabled']);
+            $show->field('isdel')->using([1 => 'Yes', 0 => 'No']);
+            $show->field('isblack')->using([1 => 'Yes', 0 => 'No']);
             $show->field('lastip');
             $show->logintime()->as(function ($logintime) {
                 return date('Y-m-d H:i:s', $logintime);
@@ -156,49 +156,49 @@ class UserController extends AdminController
             $form->display('id');
             // $form->text('fid');
             if ($form->isCreating()) {
-                $form->text('username')->rules('required|unique:users', ['required' => '请填写用户名', 'unique' => '用户名重复']);
+                $form->text('username')->rules('required|unique:users', ['required' => 'Username is required', 'unique' => 'Username already exists']);
             } else {
                 $form->display('username');
             }
-            $form->text('password', '密码')->creationRules('required|min:6|max:16', ['required' => '请填写密码', 'min' => '密码最少6位数', 'max' => '密码最多16位']);
-            $form->text('realname')->rules('required', ['required' => '请填写真实姓名']);
+            $form->text('password', 'Password')->creationRules('required|min:6|max:16', ['required' => 'Password is required', 'min' => 'Password must be at least 6 characters', 'max' => 'Password must be at most 16 characters']);
+            $form->text('realname')->rules('required', ['required' => 'Full name is required']);
 
             $settlements = UserVip::all();
             $options = [];
             foreach ($settlements as $k => $v) {
                 $options[$v->id] = $v->vipname;
             }
-            $form->select('vip', '会员等级')->options($options);
+            $form->select('vip', 'Member Level')->options($options);
 
 
             $form->text('level')->value(0);
             $form->text('paypwd')->required();
             // $form->text('isonline');
-            $form->radio('isagent')->options([1 => '是', 0 => '否'])->default(0);
+            $form->radio('isagent')->options([1 => 'Yes', 0 => 'No'])->default(0);
 
             $settlements = \App\Models\User::where('isagent', 1)->get();
             $options = [];
             foreach ($settlements as $k => $v) {
                 $options[$v->id] = $v->username;
             }
-            $form->select('pid', '上级代理')->options($options);
+            $form->select('pid', 'Parent Agent')->options($options);
 
-            $form->radio('allowagent')->options([1 => '是', 0 => '否'])->default(1);
+            $form->radio('allowagent')->options([1 => 'Yes', 0 => 'No'])->default(1);
             $form->text('balance')->disable()->default(0.0);
             $form->text('mbalance')->disable()->default(0.0);
             $form->text('phone');
             $form->text('mail');
             // $form->text('paysum');
-            $form->radio('status')->options([1 => '正常', 0 => '禁用'])->default(1);
-            $form->radio('isdel')->options([1 => '是', 0 => '否'])->default(0);
-            $form->radio('isblack')->options([1 => '是', 0 => '否'])->default(0);
+            $form->radio('status')->options([1 => 'Active', 0 => 'Disabled'])->default(1);
+            $form->radio('isdel')->options([1 => 'Yes', 0 => 'No'])->default(0);
+            $form->radio('isblack')->options([1 => 'Yes', 0 => 'No'])->default(0);
             // $form->text('lastip');
             // $form->text('logintime');
             $form->text('sourceurl');
             // $form->text('loginsum');
 
             $form->saving(function (Form $form) {
-                // 判断是否是新增操作
+                // Check if this is a create operation
                 $form->vip = empty($form->vip) ? 1 :  $form->vip;
                 if ($form->isCreating()) {
                     $form->settlement_id = 3;
