@@ -1,57 +1,426 @@
 /* 
  * custom-new.css
- * 创建时间：2024年
- * 描述：新的自定义样式文件
+ * Cập nhật: 2024
+ * Mô tả: Giao diện di động 440×956 - Autolayout cân đối - Padding chuyên nghiệp
  */
 
-/* 重置样式 */
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* 全局样式 */
+/* ============================================================
+   KHUNG GIAO DIỆN MOBILE 440×956
+   ============================================================ */
 :root {
-    --primary-color: #007bff;
+    --app-width: 440px;
+    --app-height: 956px;
+    --primary-color: #179cff;
     --secondary-color: #6c757d;
     --success-color: #28a745;
     --danger-color: #dc3545;
     --warning-color: #ffc107;
-    --info-color: #17a2b8;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
+    --bg-color: #f5f7fa;
+    --card-bg: #ffffff;
+    --text-primary: #222222;
+    --text-secondary: #666666;
+    --border-radius: 12px;
+    /* Padding chuyên nghiệp */
+    --pad-xs: 4px;
+    --pad-sm: 8px;
+    --pad-md: 12px;
+    --pad-lg: 16px;
+    --pad-xl: 20px;
+    --pad-xxl: 24px;
 }
 
-/* 响应式布局基础类 */
-.container {
+/* Khung ngoài - căn giữa trên màn hình lớn */
+html, body {
+    background: #e8ecf0;
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/* Container chính - cố định 440px */
+#app {
+    width: var(--app-width) !important;
+    max-width: var(--app-width) !important;
+    min-height: var(--app-height) !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    background: var(--bg-color) !important;
+    overflow-x: hidden !important;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* Trên màn hình nhỏ hơn 440px - full width */
+@media (max-width: 440px) {
+    #app {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+    }
+    body {
+        background: var(--bg-color);
+    }
+}
+
+/* ============================================================
+   AUTOLAYOUT - THANH ĐIỀU HƯỚNG DƯỚI
+   ============================================================ */
+.van-hairline--top-bottom.van-tabbar.van-tabbar--fixed {
+    width: var(--app-width) !important;
+    max-width: var(--app-width) !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    border-top-left-radius: 16px !important;
+    border-top-right-radius: 16px !important;
+    box-shadow: 0 -3px 16px rgba(0, 0, 0, 0.10) !important;
+    background-color: #ffffff !important;
+    border-top: none !important;
+    padding-bottom: env(safe-area-inset-bottom, 8px) !important;
+}
+
+@media (max-width: 440px) {
+    .van-hairline--top-bottom.van-tabbar.van-tabbar--fixed {
+        width: 100% !important;
+        left: 0 !important;
+        transform: none !important;
+    }
+}
+
+/* ============================================================
+   AUTOLAYOUT - ĐẦU TRANG (HEADER)
+   ============================================================ */
+.homeHeder {
+    position: relative !important;
+    background-color: #ffffff !important;
+    z-index: 10 !important;
+    height: 52px !important;
+    padding: 0 var(--pad-lg) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.homeHeder .leftImg {
+    height: 40px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+
+/* ============================================================
+   AUTOLAYOUT - BANNER / SWIPER
+   ============================================================ */
+.van-swipe {
+    margin: var(--pad-md) var(--pad-lg) !important;
+    width: calc(var(--app-width) - 2 * var(--pad-lg)) !important;
+    height: 172px !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10) !important;
+}
+
+.van-swipe__track { height: 100%; }
+
+.van-swipe-item {
+    height: 100%;
+    border-radius: var(--border-radius);
+}
+
+.van-swipe-item img {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
 }
 
-/* 工具类 */
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
+.van-swipe__indicators { bottom: 10px !important; }
 
-/* 响应式断点 */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 10px;
-    }
+.van-swipe__indicator {
+    width: 6px !important;
+    height: 6px !important;
+    background-color: rgba(255,255,255,0.55) !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease;
 }
 
-@media (max-width: 576px) {
-    .container {
-        padding: 0 5px;
-    }
+.van-swipe__indicator--active {
+    width: 18px !important;
+    border-radius: 4px !important;
+    background-color: #fff !important;
+    opacity: 1 !important;
 }
 
+/* ============================================================
+   AUTOLAYOUT - KHU VỰC THAO TÁC NHANH (NẠP / RÚT / CHUYỂN)
+   ============================================================ */
+.appbox {
+    height: 64px !important;
+    margin: var(--pad-sm) var(--pad-lg) !important;
+    border-radius: var(--border-radius) !important;
+    background: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 var(--pad-lg) !important;
+}
+
+/* ============================================================
+   AUTOLAYOUT - DANH SÁCH TRÒ CHƠI
+   ============================================================ */
+.gameBoxs {
+    display: flex !important;
+    align-items: flex-start !important;
+    padding: 0 var(--pad-lg) !important;
+    gap: var(--pad-sm) !important;
+}
+
+.lfst {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: var(--pad-xs) 0 !important;
+    flex-shrink: 0 !important;
+}
+
+.lfst .ls {
+    margin: var(--pad-sm) 0 !important;
+    padding: var(--pad-xs) 0 !important;
+}
+
+.lfst .ls.active {
+    margin: var(--pad-sm) 0 !important;
+    color: var(--primary-color) !important;
+}
+
+/* Khu vực ảnh game bên phải */
 .rigts {
-    position: relative;
+    display: block !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: relative !important;
+    overflow-y: auto !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
 }
+
+.rigts::-webkit-scrollbar { display: none; }
+
+.rigts img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: var(--pad-sm) 0 !important;
+    aspect-ratio: 8 / 3 !important;
+    height: auto !important;
+    object-fit: cover !important;
+    border-radius: var(--border-radius) !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+    padding: 0 !important;
+    transition: box-shadow 0.3s, transform 0.3s !important;
+}
+
+.rigts img:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.16) !important;
+    transform: translateY(-3px) scale(1.02) !important;
+}
+
+/* ============================================================
+   AUTOLAYOUT - THÔNG BÁO CUỘN
+   ============================================================ */
+.permanent-url {
+    text-align: center !important;
+    padding: var(--pad-xs) var(--pad-lg) !important;
+    color: #888 !important;
+    font-size: 12px !important;
+    background: #f0f4f8 !important;
+    margin: 0 var(--pad-lg) var(--pad-sm) !important;
+    display: block !important;
+    border: 1px solid #e4e8ef !important;
+    border-radius: 6px !important;
+}
+
+.permanent-url span {
+    font-weight: 500;
+    color: #888 !important;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   AUTOLAYOUT - CÁC CARD / Ô NỘI DUNG
+   ============================================================ */
+.consg {
+    padding: var(--pad-lg) !important;
+    margin-top: 0 !important;
+}
+
+.consg .lis {
+    width: 100% !important;
+    margin-bottom: var(--pad-md) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+    background: var(--card-bg) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07) !important;
+}
+
+.consg .lis img {
+    width: 100% !important;
+    height: 110px !important;
+    object-fit: cover !important;
+}
+
+.consg .lis .tite_sf {
+    padding: var(--pad-md) var(--pad-md) !important;
+    font-size: 14px !important;
+    color: var(--text-primary) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* ============================================================
+   AUTOLAYOUT - TÊN GAME & GIÁ TRỊ
+   ============================================================ */
+.lefsg .name {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+}
+
+.lefsg .mey {
+    font-size: 1.0em !important;
+    color: var(--text-secondary) !important;
+}
+
+/* ============================================================
+   AUTOLAYOUT - NÚT BẤM
+   ============================================================ */
+.van-button--info.van-button--mini {
+    font-size: 14px !important;
+    padding: 0 var(--pad-lg) !important;
+    height: 34px !important;
+    border-radius: 8px !important;
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.van-button--info.van-button--mini:active {
+    background-color: #1285d8 !important;
+    border-color: #1285d8 !important;
+}
+
+/* ============================================================
+   AUTOLAYOUT - TAB DANH MỤC
+   ============================================================ */
+.van-tabs__nav .van-tab__text {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+}
+
+.van-tabs__nav .van-tab {
+    padding: 0 var(--pad-lg) !important;
+}
+
+.van-tabs__nav .van-tab--active .van-tab__text {
+    color: var(--primary-color) !important;
+    font-weight: 700 !important;
+}
+
+.van-tabs__line {
+    height: 3px !important;
+    bottom: 0 !important;
+    background-color: var(--primary-color) !important;
+    border-radius: 3px !important;
+}
+
+/* ============================================================
+   AUTOLAYOUT - PHONG BÌ ĐỎ
+   ============================================================ */
+#redPacket {
+    position: fixed !important;
+    right: calc(50% - var(--app-width)/2 + 12px) !important;
+    bottom: 70px !important;
+    width: 76px !important;
+    height: 86px !important;
+    z-index: 999 !important;
+    cursor: pointer !important;
+    background: url(/static/image/red-packet.png) !important;
+    background-size: 100% 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18) !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+}
+
+@media (max-width: 440px) {
+    #redPacket {
+        right: 10px !important;
+    }
+}
+
+#redPacket .grab {
+    margin-top: 22px !important;
+    width: 36px !important;
+    height: 22px !important;
+    padding-top: 20px !important;
+    background: url(/static/image/grab.png) no-repeat center !important;
+    background-size: 100% 100% !important;
+    -webkit-animation: scaleDraw .4s linear infinite !important;
+}
+
+#redPacket img {
+    position: absolute !important;
+    top: 0 !important;
+    right: -10px !important;
+    width: 20px !important;
+    filter: grayscale(100%) !important;
+}
+
+#redPacket:hover {
+    transform: scale(1.06) !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.24) !important;
+}
+
+#redPacket:active {
+    transform: scale(0.96) !important;
+}
+
+/* ============================================================
+   AUTOLAYOUT - ĐĂNG NHẬP
+   ============================================================ */
+.login_formContainer__2zhUW {
+    margin-top: -120px !important;
+    padding: 0 var(--pad-xl) !important;
+}
+
+.login_inputBox__3j84z {
+    width: 88% !important;
+    margin: -20px auto 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+/* ============================================================
+   AUTOLAYOUT - HOT TAG
+   ============================================================ */
 .rigts .hot-tag {
     position: absolute;
     left: 10px;
@@ -59,7 +428,7 @@
     transform: translateY(-50%);
     background: none;
     color: #303442;
-    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+    font-family: 'AkrobatBold', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
     font-weight: bold;
     padding: 0;
     border-radius: 0;
@@ -70,31 +439,53 @@
     align-items: flex-end;
     gap: 2px;
 }
+
 .rigts .hot-tag .hot-num {
     position: relative;
     top: 4px;
-    margin-top: 0;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
     color: #303442;
     line-height: 1;
     font-family: 'AkrobatBold', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
 }
+
 .rigts .hot-tag .hot-text {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: normal;
     color: #303442;
     margin-left: 2px;
     line-height: 1.2;
 }
-.rigts {
-    /* 保证父级有定位 */
-    position: relative;
+
+/* ============================================================
+   ANIMATION
+   ============================================================ */
+@keyframes scaleDraw {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.1); }
+    50%  { transform: scale(1.2); }
+    75%  { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
+/* ============================================================
+   FONT
+   ============================================================ */
 @font-face {
     font-family: 'AkrobatBold';
     src: url('/static/font/Akrobat-Bold.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-} 
+}
+
+/* ============================================================
+   TIỆN ÍCH
+   ============================================================ */
+.text-center { text-align: center; }
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+
+/* Ẩn thanh cuộn toàn trang */
+::-webkit-scrollbar { width: 0; height: 0; }
+html { scrollbar-width: none; }
