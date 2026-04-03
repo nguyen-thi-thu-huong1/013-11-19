@@ -34,14 +34,6 @@ var VI_TRANSLATIONS = {
     '登录/注册后查看': 'Xem sau khi đăng nhập/đăng ký',
     '您的账号登陆过期，请重新登陆': 'Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại',
     '认证失败': 'Xác thực thất bại',
-    '注': '  Đăng',
-    '册': '  ký',
-    '新': '  Người',
-    '用': '  dùng',
-    '户': '  mới',
-    '返': '  Quay',
-    '回': '  lại',
-    '登': '  Đăng',
 
     // Xác thực form
     ' 用户名长度6~16位，以字母或数字组合！': 'Tên đăng nhập 6-16 ký tự, bao gồm chữ và số!',
